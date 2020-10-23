@@ -6,4 +6,5 @@ Created on Fri Oct 23 13:34:03 2020
 """
 
 a=int(196)
-print(a)
+b=int(-69)
+print(a+b)
