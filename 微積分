@@ -1,0 +1,14 @@
+#
+from sympy import diff,Symbol,integrate
+x=Symbol("x")
+while(True):
+    a=input('請輸入函數(輸入0結束)f(x):')
+    if a=='0':
+        print('結束')
+        break  
+    else:
+        b=diff(a,x)
+        print('f\'(x)=%s'%(b))
+        
+
+    
