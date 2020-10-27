@@ -1,12 +1,41 @@
-#
+
+
+
+
 from sympy import diff,Symbol,integrate
+
+
 x=Symbol("x")
+
+print("微分請輸入dif \n積分請輸入int \n停止請輸入stop")
+
 while(True):
-    a=input('請輸入函數(輸入0結束)f(x):')
-    if a=='0':
-        print('結束')
-        break  
+    
+    choose=input('****微分或積分****\n輸入:')
+    
+    if choose=='stop':
+        print("結束")
+        break
+    
+    elif choose=='help':
+        print('救命')
+    
+    
+    #微分
+    elif choose=='dif':  
+        a=diff(input('請輸入函數(輸入0結束)f(x):'),x)
+        print('f\'(x)=%s'%(a))
+    
+    
+    #積分
+    elif choose=='int':       
+        b=integrate(input('請輸入函數(輸入0結束)f(x):') ,x)
+        print('F(x)=%s'%(b))
+        
+    
+    
     else:
+        print("錯誤，請重新輸入")
         b=diff(a,x)
         print('f\'(x)=%s'%(b))
         
