@@ -18,7 +18,7 @@ while(True):
         break
     
     elif choose=='help':
-        print('救命')
+        print('救命\n 1.乘方用**,ex:x**2代表x平方\n ')
     
     
     #微分
