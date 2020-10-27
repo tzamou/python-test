@@ -13,7 +13,7 @@ from sympy import diff,Symbol,integrate
 
 x=Symbol("x")
 
-print("微分請輸入dif \n積分請輸入int \n停止請輸入stop")
+print("微分請輸入dif \n積分請輸入int \n停止請輸入stop \n輸入help來看提示")
 
 while(True):
     
@@ -24,12 +24,12 @@ while(True):
         break
     
     elif choose=='help':
-        print('救命\n 1.乘方用**,ex:x**2代表x平方\n ')
+        print('*****小抄*****\n 1.乘方用 ^。ex:x^2代表x平方\n 2.三角函數:sin,cos,tan,sec,csc,cot\n 3.自然對數exp(x)表示e的x次方\n ')
     
     
     #微分
     elif choose=='dif':  
-        a=str(diff(input('請輸入函數(輸入0結束)f(x):'),x))
+        a=str(diff(input('請輸入函數(輸入0結束)f(x):').replace('^','**'),x))
         print('f\'(x)=%s'%(a.replace('**','^').replace('*','')))
         
         
@@ -37,7 +37,7 @@ while(True):
     
     #積分
     elif choose=='int':       
-        b=str(integrate(input('請輸入函數(輸入0結束)f(x):') ,x))
+        b=str(integrate(input('請輸入函數(輸入0結束)f(x):').replace('^','**') ,x))
         print('F(x)=%s'%(b.replace('**','^').replace('*','')))
         
     
