@@ -28,17 +28,17 @@ while(True):
     
     
     #微分
-    elif choose=='dif':  
+    elif choose=='dif':
         a=str(diff(input('請輸入函數(輸入0結束)f(x):').replace('^','**'),x))
         print('f\'(x)=%s'%(a.replace('**','^').replace('*','')))
         
         
     
     
-    #積分
+    #不定積分
     elif choose=='int':       
         b=str(integrate(input('請輸入函數(輸入0結束)f(x):').replace('^','**') ,x))
-        print('F(x)=%s'%(b.replace('**','^').replace('*','')))
+        print('F(x)=%s+C'%(b.replace('**','^').replace('*','')))
         
     
     
