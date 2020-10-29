@@ -8,7 +8,7 @@ Created on Mon Oct 26 21:28:14 2020
 
 
 
-from sympy import diff,Symbol,integrate
+from sympy import diff,Symbol,integrate,expand
 
 
 x=Symbol("x")
@@ -16,38 +16,40 @@ x=Symbol("x")
 print("微分請輸入dif \n積分請輸入int \n停止請輸入stop \n輸入help來看提示")
 
 while(True):
-    
+   
     choose=input('****微分或積分****\n輸入:')
     
     if choose=='stop':
-        print("結束")
+        print("結束!")
         break
     
     elif choose=='help':
         print('*****小抄*****\n 1.乘方用 ^。ex:x^2代表x平方\n 2.三角函數:sin,cos,tan,sec,csc,cot\n 3.自然對數exp(x)表示e的x次方\n ')
-    #無限用oo表示
+    #無限用oo表示pi I sqrt() log() erf()
+    #避免輸入a 程式碼會將a改成arc表示反三角函數
     
     #微分
     elif choose=='dif':
-        a=str(diff(input('微分:請輸入函數f(x):').replace('^','**'),x))
-        print('f\'(x)=%s'%(a.replace('**','^').replace('*','')))
+        a=str(expand(diff(input('微分:請輸入函數f(x):').replace('^','**'),x)))
+        print('f\'(x)=%s'%(a.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
         
-        
-    
-    
-    #不定積分
+
+    #不定積分&定積分   ∫ 
     #ind=indefinite integration. def=definite integration
+    
     elif choose=='int':
+       
         print('不定積分輸入ind \n定積分輸入def\n****不定積分或定積分****')
         intchoose=input('輸入:')
         if intchoose=='ind':
-            b=str(integrate(input('不定積分:請輸入函數f(x):').replace('^','**') ,x))
-            print('F(x)=%s+C'%(b.replace('**','^').replace('*','')))
+            b=str(expand(integrate(input('不定積分:請輸入函數f(x):').replace('^','**') ,x)))
+            print('F(x)=%s+C'%(b.replace('**','^').replace('*','').replace('a','arc').replace('log','ln').replace('Integrarcl', '自己算，程式跑不動惹ＱＱ➝➝')))
         elif intchoose=='def':
             print('請輸入函數f(x)以及積分上下限')
-            c=str(integrate(input('請輸入函數f(x):').replace('^','**'), (x,str(input('下限:')),str(input('上限:')))))
+            c=str(expand(integrate(input('請輸入函數f(x):').replace('^','**'), (x,str(input('下限:')),str(input('上限:'))))))
             #判斷瑕積分(improper integral)
-            print('Ans: %s'%(c.replace('**','^').replace('*','')))
+            print('Ans: %s'%(c.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
+       
         #elif intchoose=='ret' ret=return
         #跳回選擇微積分的選項
         
