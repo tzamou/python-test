@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Oct 29 21:57:50 2020
+
+@author: chenguanlin
+"""
+
+
+import os
+
+
+def print_board(board):
+    print('位置範例')
+    print('1|2|3')
+    print('-+-+-')
+    print('4|5|6')
+    print('-+-+-')
+    print('7|8|9\n')
+   
+    
+    print(board['1'] + '|' + board['2'] + '|' + board['3'])
+    print('-+-+-')
+    print(board['4'] + '|' + board['5'] + '|' + board['6'])
+    print('-+-+-')
+    print(board['7'] + '|' + board['8'] + '|' + board['9'])
+
+
+def main():
+    init_board = {
+        '1': ' ', '2': ' ', '3': ' ',
+        '4': ' ', '5': ' ', '6': ' ',
+        '7': ' ', '8': ' ', '9': ' '
+    }
+    begin = True
+    while begin:
+        curr_board = init_board.copy()
+        begin = False
+        turn = 'x'
+        counter = 0
+        os.system('clear')
+        print_board(curr_board)
+        while counter < 9:
+            move = input('輪到%s了, 請輸入位置: ' % turn)
+            if curr_board[move] == ' ':
+                counter += 1
+                curr_board[move] = turn
+                if turn == 'x':
+                    turn = 'o'
+                else:
+                    turn = 'x'
+            os.system('clear')
+            print_board(curr_board)
+        choice = input('再玩一局？(y or n) ')
+        begin = choice == 'y'
+
+
+if __name__ == '__main__':
+    main()
