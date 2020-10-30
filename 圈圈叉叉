@@ -12,25 +12,36 @@ import os
 
 def print_board(board):
     print('位置範例')
-    print('1|2|3')
-    print('-+-+-')
-    print('4|5|6')
-    print('-+-+-')
-    print('7|8|9\n')
+    print('1|2|3|4|5')
+    print('-+-+-+-+-')
+    print('6|7|8|9|a')
+    print('-+-+-+-+-')
+    print('b|c|d|e|f')
+    print('-+-+-+-+-')
+    print('g|h|i|j|k')
+    print('-+-+-+-+-')
+    print('l|m|n|o|p\n')
    
     
-    print(board['1'] + '|' + board['2'] + '|' + board['3'])
-    print('-+-+-')
-    print(board['4'] + '|' + board['5'] + '|' + board['6'])
-    print('-+-+-')
-    print(board['7'] + '|' + board['8'] + '|' + board['9'])
+    print(board['1'] + '|' + board['2'] + '|' + board['3']+'|'+board['4']+'|'+board['5'])
+    print('-+-+-+-+-')
+    print(board['6'] + '|' + board['7'] + '|' + board['8']+'|'+board['9']+'|'+board['a'])
+    print('-+-+-+-+-')
+    print(board['b'] + '|' + board['c'] + '|' + board['d']+'|'+board['e']+'|'+board['f'])
+    print('-+-+-+-+-')
+    print(board['g'] + '|' + board['h'] + '|' + board['i']+'|'+board['j']+'|'+board['k'])
+    print('-+-+-+-+-')
+    print(board['l'] + '|' + board['m'] + '|' + board['n']+'|'+board['o']+'|'+board['p'])
+    
 
 
 def main():
     init_board = {
-        '1': ' ', '2': ' ', '3': ' ',
-        '4': ' ', '5': ' ', '6': ' ',
-        '7': ' ', '8': ' ', '9': ' '
+        '1': ' ', '2': ' ', '3': ' ','4': ' ', '5': ' ',
+        '6': ' ', '7': ' ', '8': ' ','9': ' ', 'a': ' ', 
+        'b': ' ', 'c': ' ', 'd': ' ','e': ' ', 'f': ' ',
+        'g': ' ', 'h': ' ', 'i': ' ','j': ' ', 'k': ' ',
+        'l': ' ', 'm': ' ', 'n': ' ','o': ' ', 'p': ' ',
     }
     begin = True
     while begin:
@@ -40,7 +51,7 @@ def main():
         counter = 0
         os.system('clear')
         print_board(curr_board)
-        while counter < 9:
+        while counter < 25:
             move = input('輪到%s了, 請輸入位置: ' % turn)
             if curr_board[move] == ' ':
                 counter += 1
