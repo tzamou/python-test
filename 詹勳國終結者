@@ -8,12 +8,12 @@ Created on Mon Oct 26 21:28:14 2020
 
 
 
-from sympy import diff,Symbol,integrate,expand
+from sympy import diff,integrate,expand,symbols
 
 
-x=Symbol("x")
+x,y=symbols("x y")
 
-print("微分請輸入dif \n積分請輸入int \n停止請輸入stop \n輸入help來看提示")
+print("微分請輸入dif \n積分請輸入int \n二重積分請輸入mul \n停止請輸入stop \n輸入help來看提示")
 
 while(True):
    
@@ -24,9 +24,12 @@ while(True):
         break
     
     elif choose=='help':
-        print('*****小抄*****\n 1.乘方用 ^。ex:x^2代表x平方\n 2.三角函數:sin,cos,tan,sec,csc,cot\n 3.自然對數exp(x)表示e的x次方\n ')
+        print('*****小抄*****')
+        print('1.乘方用 ^。ex:x^2代表x平方')
+        print('2.三角函數:sin,cos,tan,sec,csc,cot')
+        print('3.自然對數exp(x)表示e的x次方')
     #無限用oo表示pi I sqrt() log() erf()
-    #避免輸入a 程式碼會將a改成arc表示反三角函數
+    #避免輸入a 程式碼會將a改成arc表示反三角函數,代換法先代換
     
     #微分
     elif choose=='dif':
@@ -52,12 +55,16 @@ while(True):
        
         #elif intchoose=='ret' ret=return
         #跳回選擇微積分的選項
-        
+
         else:
             print('錯誤')#增加直接跳回判斷不定積分或積分的迴圈
             
-        
-    
+     #multiple integrals
+    elif choose=='mul' :
+        print('預設先積分y')
+        d=str(integrate(input('二重積分,請輸入函數f(x,y):'),(y,input('y下限:'),input('y上限:')),(x,input('x下限:'),input('x上限:'))))
+        print('Ans: %s'%(d.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
+    #新增fubini定理
     
     else:
         print("錯誤，請重新輸入")
