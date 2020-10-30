@@ -10,10 +10,11 @@ Created on Mon Oct 26 21:28:14 2020
 
 from sympy import diff,integrate,expand,symbols
 
-
 x,y=symbols("x y")
+#加入更多變數以應付偏微分,多重積分
 
-print("微分請輸入dif \n積分請輸入int \n二重積分請輸入mul \n停止請輸入stop \n輸入help來看提示")
+print("微分請輸入dif \n積分請輸入int \n二重積分請輸入dou \n多重積分請輸入mul(待更新) \n停止請輸入stop \n輸入help來看提示")
+#嘗試寫偏微分,多重積分
 
 while(True):
    
@@ -28,10 +29,17 @@ while(True):
         print('1.乘方用 ^。ex:x^2代表x平方')
         print('2.三角函數:sin,cos,tan,sec,csc,cot')
         print('3.自然對數exp(x)表示e的x次方')
-    #無限用oo表示pi I sqrt() log() erf()
-    #避免輸入a 程式碼會將a改成arc表示反三角函數,代換法先代換
+    #提示之後要加的備忘錄
+    #無限用oo表示
+    #pi代表圓周率
+    #sqrt()代表開根號 
+    #I 代表sqrt(-1)
+    #log()轉ln()
+    #erf()=誤差函數
+    #避免輸入a 因為程式碼會將a改成arc表示反三角函數
+    #如果有複雜的代換法先代換,否則程式會死給你看
     
-    #微分
+    #微分 differentiation
     elif choose=='dif':
         a=str(expand(diff(input('微分:請輸入函數f(x):').replace('^','**'),x)))
         print('f\'(x)=%s'%(a.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
@@ -46,7 +54,7 @@ while(True):
         intchoose=input('輸入:')
         if intchoose=='ind':
             b=str(expand(integrate(input('不定積分:請輸入函數f(x):').replace('^','**') ,x)))
-            print('F(x)=%s+C'%(b.replace('**','^').replace('*','').replace('a','arc').replace('log','ln').replace('Integrarcl', '自己算，程式跑不動惹ＱＱ➝➝')))
+            print('F(x)=%s+C'%(b.replace('**','^').replace('*','').replace('a','arc').replace('log','ln').replace('Integrarcl', '自己算，程式跑不動惹(先做代換後再輸入)ＱＱ➝➝')))
         elif intchoose=='def':
             print('請輸入函數f(x)以及積分上下限')
             c=str(expand(integrate(input('請輸入函數f(x):').replace('^','**'), (x,str(input('下限:')),str(input('上限:'))))))
@@ -60,11 +68,19 @@ while(True):
             print('錯誤')#增加直接跳回判斷不定積分或積分的迴圈
             
      #multiple integrals
-    elif choose=='mul' :
+    elif choose=='dou' :
         print('預設先積分y')
         d=str(integrate(input('二重積分,請輸入函數f(x,y):'),(y,input('y下限:'),input('y上限:')),(x,input('x下限:'),input('x上限:'))))
         print('Ans: %s'%(d.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
-    #新增fubini定理
+    #新增fubini theorem,再寫一個if else
+        
+    
+    #新增多重積分
+    #構想：用for迴圈選擇幾重積分,然後重複積分上去,變數要自己輸入,記得用str轉資料型態
     
     else:
         print("錯誤，請重新輸入")
+        
+        
+        
+        
