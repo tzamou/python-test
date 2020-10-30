@@ -13,6 +13,7 @@ from sympy import diff,integrate,expand,symbols
 x,y=symbols("x y")
 #加入更多變數以應付偏微分,多重積分
 
+
 print("微分請輸入dif \n積分請輸入int \n二重積分請輸入dou \n多重積分請輸入mul(待更新) \n停止請輸入stop \n輸入help來看提示")
 #嘗試寫偏微分,多重積分
 
@@ -44,7 +45,9 @@ while(True):
         a=str(expand(diff(input('微分:請輸入函數f(x):').replace('^','**'),x)))
         print('f\'(x)=%s'%(a.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
         
-
+    #加偏微分,程式會自動將不是所求的偏導數當成一般常數計算,可以加入梯度座標 ▽ｆ(nabla f)＝偏x i+偏y j,i j為向量
+        
+        
     #不定積分&定積分   ∫ 
     #ind=indefinite integration. def=definite integration
     
@@ -71,7 +74,7 @@ while(True):
     elif choose=='dou' :
         print('預設先積分y')
         d=str(integrate(input('二重積分,請輸入函數f(x,y):'),(y,input('y下限:'),input('y上限:')),(x,input('x下限:'),input('x上限:'))))
-        print('Ans: %s'%(d.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
+        print('\nAns: %s'%(d.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
     #新增fubini theorem,再寫一個if else
         
     
