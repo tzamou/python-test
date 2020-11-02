@@ -9,17 +9,19 @@ Created on Mon Oct 26 21:28:14 2020
 
 
 from sympy import diff,integrate,expand,symbols
-
 x,y=symbols("x y")
+
 #加入更多變數以應付偏微分,多重積分
 
 
 print("微分請輸入dif \n積分請輸入int \n偏微分請輸入par \n二重積分請輸入dou \n多重積分請輸入mul(待更新) \n停止請輸入stop \n輸入help來看提示")
 #嘗試寫偏微分,多重積分
 
+             
+
 while(True):
    
-    choose=input('****微分或積分****\n輸入:')
+    choose=input('****請輸入功能****\n輸入:')
     
     if choose=='stop':
         print("結束!")
@@ -72,8 +74,8 @@ while(True):
     #ind=indefinite integration. def=definite integration
     
     elif choose=='int':
-       
-        print('不定積分輸入ind \n定積分輸入def\n****不定積分或定積分****')
+
+        print('不定積分請輸入ind \n定積分請輸入def \n****不定積分或定積分****')
         intchoose=input('輸入:')
         if intchoose=='ind':
             b=str(expand(integrate(input('不定積分,請輸入函數f(x):').replace('^','**') ,x)))
@@ -81,15 +83,13 @@ while(True):
         elif intchoose=='def':
             print('請輸入函數f(x)以及積分上下限')
             c=str(expand(integrate(input('請輸入函數f(x):').replace('^','**'), (x,str(input('下限:')),str(input('上限:'))))))
-            #判斷瑕積分(improper integral)
+             #判斷瑕積分(improper integral)
             print('Ans: %s'%(c.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
-       
-        #elif intchoose=='ret' ret=return
-        #跳回選擇微積分的選項
-
+        
+                
         else:
-            print('錯誤')#增加直接跳回判斷不定積分或積分的迴圈
-    
+            print('錯誤')
+            
             
      #multiple integrals
     elif choose=='dou' :
@@ -111,6 +111,10 @@ while(True):
     else:
         print("錯誤，請重新輸入")
         
-        
-        
-        
+
+
+
+            
+            
+            
+            
