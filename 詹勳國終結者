@@ -42,16 +42,30 @@ while(True):
     
     #微分 differentiation
     elif choose=='dif':
-        a=str(expand(diff(input('微分:請輸入函數f(x):').replace('^','**'),x)))
+        a=str(expand(diff(input('微分,請輸入函數f(x):').replace('^','**'),x)))
         print('f\'(x)=%s'%(a.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
         
     #加偏微分pratial derivatives,程式會自動將不是所求的偏導數當成一般常數計算,可以加入梯度座標 ▽ｆ(nabla f)＝偏x i+偏y j,i j為向量
     elif choose=='par':
-        e=input('偏微分:請輸入函數f(x):')
-        ex=str(expand(diff(e.replace('^','**'),x)))
-        ey=str(expand(diff(e.replace('^','**'),y)))
         
-        print('▽f=((%s)i+(%s)j)'%(ex.replace('**','^').replace('*','').replace('a','arc').replace('log','ln'),ey.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
+        listnum=[]
+        listvar=[]
+        par=str(input('偏微分,請輸入函數f(x):').replace('^','**'))
+        n=int(input('要對幾個變數做偏微分:'))
+        for n in range(1,n+1):
+            
+            num=str(input('對第%d個變數的偏導數:'%(n)))
+            listnum.append(num)
+            e=str(expand(diff(par,num)))
+            listvar.append(e)
+        print('▽f={ ',end='')
+        for a in range(n-1):
+            
+            print('(%s),'%(listvar[a].replace('**','^').replace('*','').replace('a','arc').replace('log','ln')),end="")
+        print('(%s) }'%(listvar[n-1].replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
+        
+        
+       
             
       
     #不定積分&定積分   ∫ 
@@ -62,7 +76,7 @@ while(True):
         print('不定積分輸入ind \n定積分輸入def\n****不定積分或定積分****')
         intchoose=input('輸入:')
         if intchoose=='ind':
-            b=str(expand(integrate(input('不定積分:請輸入函數f(x):').replace('^','**') ,x)))
+            b=str(expand(integrate(input('不定積分,請輸入函數f(x):').replace('^','**') ,x)))
             print('F(x)=%s+C'%(b.replace('**','^').replace('*','').replace('a','arc').replace('log','ln').replace('Integrarcl', '自己算，程式跑不動惹(先做代換後再輸入)ＱＱ➝➝')))
         elif intchoose=='def':
             print('請輸入函數f(x)以及積分上下限')
@@ -79,9 +93,15 @@ while(True):
             
      #multiple integrals
     elif choose=='dou' :
-        print('預設先積分y')
-        d=str(integrate(input('二重積分,請輸入函數f(x,y):'),(y,input('y下限:'),input('y上限:')),(x,input('x下限:'),input('x上限:'))))
-        print('\nAns: %s'%(d.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
+        fubini=input('先對誰做積分？y or x:')
+        if fubini=='y':
+            d1=str(integrate(input('二重積分,請輸入函數f(x,y):'),(y,input('y下限:'),input('y上限:')),(x,input('x下限:'),input('x上限:'))))
+            print('\nAns: %s'%(d1.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
+        elif fubini=='x':
+            d2=str(integrate(input('二重積分,請輸入函數f(x,y):'),(x,input('x下限:'),input('x上限:')),(y,input('y下限:'),input('y上限:'))))
+            print('\nAns: %s'%(d2.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
+        
+        
     #新增fubini theorem,再寫一個if else
         
     
