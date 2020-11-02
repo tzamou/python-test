@@ -11,11 +11,11 @@ Created on Mon Oct 26 21:28:14 2020
 from sympy import diff,integrate,expand,symbols
 x,y=symbols("x y")
 
-#加入更多變數以應付偏微分,多重積分
+#加入更多變數以應付偏微分,多重積分(11/3更新：似乎不用)
 
 
 print("微分請輸入dif \n積分請輸入int \n偏微分請輸入par \n二重積分請輸入dou \n多重積分請輸入mul(待更新) \n停止請輸入stop \n輸入help來看提示")
-#嘗試寫偏微分,多重積分
+#嘗試寫多重積分
 
              
 
@@ -32,16 +32,17 @@ while(True):
         print('1.乘方用 ^。ex:x^2代表x平方')
         print('2.三角函數:sin,cos,tan,sec,csc,cot')
         print('3.自然對數exp(x)表示e的x次方')
+        print('4.無限用oo表示')
+        print('5.pi代表圓周率')
+        print('6.sqrt()代表開根號')
+        print('7.I代表sqrt(-1)')
+        print('8.erf()=誤差函數')
+        print('9.避免輸入a 因為程式碼會將a改成arc表示反三角函數')
+        print('10.如果有複雜的代換法先代換,否則程式會死給你看')
     #提示之後要加的備忘錄
-    #無限用oo表示
-    #pi代表圓周率
-    #sqrt()代表開根號 
-    #I 代表sqrt(-1)
-    #log()轉ln()
-    #erf()=誤差函數
-    #避免輸入a 因為程式碼會將a改成arc表示反三角函數
-    #如果有複雜的代換法先代換,否則程式會死給你看
-    
+    #
+
+   
     #微分 differentiation
     elif choose=='dif':
         a=str(expand(diff(input('微分,請輸入函數f(x):').replace('^','**'),x)))
@@ -60,11 +61,11 @@ while(True):
             listnum.append(num)
             e=str(expand(diff(par,num)))
             listvar.append(e)
-        print('▽f={ ',end='')
-        for a in range(n-1):
+        #print('▽f={ ',end='')    #梯度但只能用於曲面
+        for a in range(n):
             
-            print('(%s),'%(listvar[a].replace('**','^').replace('*','').replace('a','arc').replace('log','ln')),end="")
-        print('(%s) }'%(listvar[n-1].replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
+            print('%s:%s'%(listnum[a],listvar[a].replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
+        #print('[%s] }'%(listvar[n-1].replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
         
         
        
