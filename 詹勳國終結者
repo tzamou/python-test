@@ -122,6 +122,7 @@ while(True):
     else:
         print("錯誤，請重新輸入")
         
+        
 
 
 
