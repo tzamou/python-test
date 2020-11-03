@@ -14,7 +14,7 @@ x,y=symbols("x y")
 #加入更多變數以應付偏微分,多重積分(11/3更新：似乎不用)
 
 
-print("微分請輸入dif \n積分請輸入int \n偏微分請輸入par \n二重積分請輸入dou \n多重積分請輸入mul(待更新) \n停止請輸入stop \n輸入help來看提示")
+print("微分請輸入dif \n積分請輸入int \n偏微分請輸入par \n二重積分請輸入dou \n多重積分請輸入mul \n停止請輸入stop \n輸入help來看提示")
 #嘗試寫多重積分
 
              
@@ -40,7 +40,7 @@ while(True):
         print('9.避免輸入a 因為程式碼會將a改成arc表示反三角函數')
         print('10.如果有複雜的代換法先代換,否則程式會死給你看')
     #提示之後要加的備忘錄
-    #
+    #theta
 
    
     #微分 differentiation
@@ -96,19 +96,29 @@ while(True):
     elif choose=='dou' :
         fubini=input('先對誰做積分？y or x:')
         if fubini=='y':
-            d1=str(integrate(input('二重積分,請輸入函數f(x,y):'),(y,input('y下限:'),input('y上限:')),(x,input('x下限:'),input('x上限:'))))
+            d1=str(integrate(input('二重積分,請輸入函數f(x,y):').replace('^','**'),(y,input('y下限:'),input('y上限:')),(x,input('x下限:'),input('x上限:'))))
             print('\nAns: %s'%(d1.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
         elif fubini=='x':
-            d2=str(integrate(input('二重積分,請輸入函數f(x,y):'),(x,input('x下限:'),input('x上限:')),(y,input('y下限:'),input('y上限:'))))
+            d2=str(integrate(input('二重積分,請輸入函數f(x,y):').replace('^','**'),(x,input('x下限:'),input('x上限:')),(y,input('y下限:'),input('y上限:'))))
             print('\nAns: %s'%(d2.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
         
         
-    #新增fubini theorem,再寫一個if else
+    
         
     
     #新增多重積分
-    #構想：用for迴圈選擇幾重積分,然後重複積分上去,變數要自己輸入,記得用str轉資料型態
-    
+    elif choose=='mul':
+        multiple=int(input('幾重積分？'))
+        function=str(input('f(x):'))
+        m=str(expand(integrate(function.replace('^','**'),(input('對誰積分：'),input('下限:'),input('上限:')) )))
+        
+        for mult in range(multiple-1):    
+            m=str(expand(integrate(m.replace('^','**'),(input('對誰積分：'),input('下限:'),input('上限:')) )))
+        print('\nAns: %s'%(m.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))        
+            
+            
+            
+        #構想：用for迴圈選擇幾重積分,然後重複積分上去,變數要自己輸入,記得用str轉資料型態    
     else:
         print("錯誤，請重新輸入")
         
