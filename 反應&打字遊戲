@@ -81,13 +81,18 @@ def demongame():
     if str(a)==str(b):
         t2=T.time()        
         print('用了%.2f秒'%(t2-t1))        
-        c=str(input('繼續(跳回簡單難度)？y or n: '))
+        c=str(input('繼續(會跳回簡單難度)？y or n: '))
         if c=='y':
             global t
             t+=1
             main2()
         elif c=='n': 
-            print('結束!下次見:)')                   
+            print('結束!下次見:)')
+        else:
+            print('錯誤')
+    else:
+        print('打錯了哈哈')
+        demongame()                   
 
 def dgame():  
     b=str(input('Ans:'))
@@ -99,13 +104,21 @@ def dgame():
         if c=='y':
             global t
             t+=1
-            difficult()
+            if(t%10==0):
+                demon()
+            else:
+                difficult()
         elif c=='n': 
             print('結束!下次見:)')
+        elif c=='easy':
+            print('恭喜發現彩蛋!獎勵:難度下降')
+            main2()
+        else:
+            print('錯誤')
         
             
     else:
-        print('error')
+        print('打錯了哈哈')
         dgame()
         
 def game():  
@@ -133,9 +146,11 @@ def game():
                 main2()
         elif c=='n': 
             print('結束!下次見:)')
+        else:
+            print('錯誤')
             
     else:
-        print('error')
+        print('打錯了哈哈')
         game()
 #-------------------------------------------------
 boolean=True
