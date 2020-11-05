@@ -11,6 +11,8 @@ def demon():
         str1='0123456789!@#$%^&*-+=<>?/:;[]{}~abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
         global a,t1
         a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)
+        print('地獄級難度 :D')
+        T.sleep(0.5)
         print('倒數五秒開始')
         print('5')
         T.sleep(1)
