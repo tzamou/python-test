@@ -7,6 +7,27 @@ Created on Thu Nov  5 21:26:06 2020
 """
 import time as T
 import random as r
+def demon():
+        str1='0123456789!@#$%^&*-+=<>?/:;[]{}~abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        global a,t1
+        a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)
+        print('倒數五秒開始')
+        print('5')
+        T.sleep(1)
+        print('4')
+        T.sleep(1)        
+        print('3')
+        T.sleep(1)
+        print('2')
+        T.sleep(1)
+        print('1')
+        T.sleep(1)
+        print('(地獄級)第%d題:'%(t),end='')
+        print(str(a))
+        t1=T.time()
+        demongame()
+
+
 def difficult():
     
         str1='0123456789!@#$%^&*-+=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -52,12 +73,25 @@ def main1():
         t1=T.time()
         game()
    
+def demongame():
+    b=str(input('Ans:'))
+    
+    if str(a)==str(b):
+        t2=T.time()        
+        print('用了%.2f秒'%(t2-t1))        
+        c=str(input('繼續(跳回簡單難度)？y or n: '))
+        if c=='y':
+            global t
+            t+=1
+            main2()
+        elif c=='n': 
+            print('結束!下次見:)')                   
+
 def dgame():  
     b=str(input('Ans:'))
     
     if str(a)==str(b):
-        t2=T.time()
-        
+        t2=T.time()        
         print('用了%.2f秒'%(t2-t1))        
         c=str(input('繼續？y or n: '))
         if c=='y':
@@ -66,9 +100,7 @@ def dgame():
             difficult()
         elif c=='n': 
             print('結束!下次見:)')
-        elif c=='easy':
-            print('恭喜發現彩蛋!獎勵：難度下降')
-            main2()
+        
             
     else:
         print('error')
@@ -84,8 +116,9 @@ def game():
         if c=='y':
             global t
             t+=1
-            
-            if (t%5==0):
+            if (t%10==0):
+                demon()
+            elif (t%5==0):
                 di=str(input('難度提高？y or n: '))
                 if di=='y':
                     difficult()
@@ -93,6 +126,7 @@ def game():
                     main2()
                 else:
                     print('錯誤')
+            
             else:
                 main2()
         elif c=='n': 
@@ -104,7 +138,7 @@ def game():
 #-------------------------------------------------
 boolean=True
 print('規則:')
-print('打出跟題目一樣的字後按enter 看你反應多快')
+print('打出跟題目一樣的字後按enter 看你速度多快')
 start=input('開始遊戲？y or n: ')
 if start=='y':
     t=int(0)
@@ -123,7 +157,7 @@ if start=='y':
     main1()
    
 elif start=='n':
-    print('掰掰')
+    print('掰掰!(｀Д´)')
 else:
     print('錯誤')
 
