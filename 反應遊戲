@@ -7,11 +7,26 @@ Created on Thu Nov  5 21:26:06 2020
 """
 import time as T
 import random as r
-
+def difficult():
+    
+        str1='0123456789!@#$%^&*-+=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        global a,t1
+        a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)
+        print('倒數三秒開始')
+        print('3')
+        T.sleep(1)
+        print('2')
+        T.sleep(1)
+        print('1')
+        T.sleep(1)
+        print('(困難)第%d題:'%(t),end='')
+        print(str(a))
+        t1=T.time()
+        dgame()
 
 def main2():
     
-        str1='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        str1='0123456789abcdefghijklmnopqrstuvwxyz'
         global a,t1
         a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)
         print('倒數三秒開始')
@@ -29,7 +44,7 @@ def main2():
 
 def main1():
     
-        str1='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        str1='0123456789abcdefghijklmnopqrstuvwxyz'
         global a,t1
         a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)       
         print('第%d題:'%(t),end='')
@@ -37,6 +52,27 @@ def main1():
         t1=T.time()
         game()
    
+def dgame():  
+    b=str(input('Ans:'))
+    
+    if str(a)==str(b):
+        t2=T.time()
+        
+        print('用了%.2f秒'%(t2-t1))        
+        c=str(input('繼續？y or n: '))
+        if c=='y':
+            global t
+            t+=1
+            difficult()
+        elif c=='n': 
+            print('結束!下次見:)')
+        elif c=='easy':
+            print('恭喜發現彩蛋!獎勵：難度下降')
+            main2()
+            
+    else:
+        print('error')
+        dgame()
         
 def game():  
     b=str(input('Ans:'))
@@ -48,7 +84,17 @@ def game():
         if c=='y':
             global t
             t+=1
-            main2()
+            
+            if (t%5==0):
+                di=str(input('難度提高？y or n: '))
+                if di=='y':
+                    difficult()
+                elif di=='n':
+                    main2()
+                else:
+                    print('錯誤')
+            else:
+                main2()
         elif c=='n': 
             print('結束!下次見:)')
             
@@ -75,6 +121,7 @@ if start=='y':
     print('1')
     T.sleep(1)
     main1()
+   
 elif start=='n':
     print('掰掰')
 else:
