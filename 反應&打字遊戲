@@ -153,7 +153,7 @@ def game():
         print('打錯了哈哈')
         game()
 #-------------------------------------------------
-boolean=True
+
 print('規則:')
 print('打出跟題目一樣的字後按enter 看你速度多快')
 start=input('開始遊戲？y or n: ')
