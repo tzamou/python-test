@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Nov  7 00:20:38 2020
+
+@author: chenguanlin
+"""
+
+import tkinter as tk
+import webbrowser as web
+def p():
+    web.open("https://www.runoob.com/python3/python-func-print.html")
+    
+def i():
+    web.open("https://sites.google.com/site/ezpythoncolorcourse/inputdataandassignment")
+    
+def f():
+    web.open("https://sites.google.com/site/ezpythoncolorcourse/forloophowtouse")
+    
+def ifelse():
+    web.open("https://medium.com/ccclub/ccclub-python-for-beginners-tutorial-ae8becaf165e")
+
+def w():
+    web.open("https://sites.google.com/site/ezpythoncolorcourse/whileloop")
+
+def d():
+    web.open("https://medium.com/ccclub/ccclub-python-for-beginners-tutorial-244862d98c18")
+def play():
+    web.open("https://www.youtube.com/watch?v=FS7M-zTWnHM")
+def ranbowegg():
+    global count
+    count+=1
+    if count==1:
+        egg.set('騙你的哈哈，但你可以再按一次')
+    if count==2:
+        egg.set('你好聽話，那再按一次')
+    if count==3:
+        egg.set('你好，快來按我吧 ;)')
+        web.open('https://drive.google.com/file/d/1IHKCb0b8EpQMkKyboe1LUWZipr_txI2S/view?usp=sharing')
+    if count==4:
+        egg.set('我想不到要說什麼了，點我看彩蛋（真心不騙）')
+        
+    if count==5:
+        egg.set('這個按鈕沒用了，跟某個微積分老師一樣（噓）')
+        eg.grid(row=2,column=0,pady=3)
+        eg2.grid(row=3,column=0,pady=3)
+        eg3.grid(row=4,column=0,pady=3)
+        
+        
+        
+       
+        
+
+elf=tk.Tk()
+elf.geometry("450x600")
+elf.title("python小精靈")
+
+frame1=tk.Frame(elf)
+frame1.pack(pady=20)
+a=tk.Label(frame1,text="可以問的東西:",bg='yellow')
+a.pack()
+
+frame2=tk.Frame(elf)
+frame2.pack(pady=30)
+p=tk.Button(frame2,text='print',width=10,command=p)
+p.grid(row=0,column=0,padx=5,pady=5)
+
+i=tk.Button(frame2,text='input',width=10,command=i)
+i.grid(row=0,column=1,padx=5,pady=5)
+
+f=tk.Button(frame2,text='for',width=10,command=f)
+f.grid(row=0,column=2,padx=5,pady=5)
+
+ifelse=tk.Button(frame2,text='if...elif...else',width=10,command=ifelse)
+ifelse.grid(row=1,column=0,padx=5,pady=5)
+
+w=tk.Button(frame2,text='while',width=10,command=w)
+w.grid(row=1,column=1,padx=5,pady=5)
+
+d=tk.Button(frame2,text='def',width=10,command=d)
+d.grid(row=1,column=2,padx=5,pady=5)
+
+frame3=tk.Frame(elf)
+frame3.pack(pady=25)
+button1=tk.Button(frame3,text='放音樂',width=10,command=play)
+button1.grid(row=0,column=0,pady=5)
+
+egg=tk.StringVar()
+button2=tk.Button(frame3,textvariable=egg,command=ranbowegg)
+egg.set('彩蛋')
+count=0
+button2.grid(row=5,column=0,pady=5)
+eg=tk.Label(frame3,text='哈哈其實我不知道你要什麼，所以可以達成你一個願望（能力範圍內）')
+eg2=tk.Label(frame3,text='截圖傳給我就可以許願:)')
+eg3=tk.Label(frame3,text='突然有一個不好的預感')
+
+
+
+
+elf.mainloop()
+
+
+
+
+
+
+
+
+
