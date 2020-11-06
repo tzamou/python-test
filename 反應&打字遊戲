@@ -162,7 +162,7 @@ def reactiongame():
     print('花了%.2f秒'%((time2-time1)))
     print('一共%d次錯誤'%(error))
     print('分數:%.2f分'%((50-((time2-time1)+int(error)*2.1)*1)*2))
-    
+    print('@要調整難度的話請輸入adj',end='')  
     c=str(input('繼續？y or n: '))
     if c=='y':
             reactiongame()
