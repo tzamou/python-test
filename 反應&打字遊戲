@@ -20,6 +20,8 @@ def adjust():
     T.sleep(0.5)
     print('demon是地獄級難度，沒事不要虐待自己，字元種類更多，隨機刷新10個字元')
     T.sleep(0.5)
+    print('reaction是考驗反應的模式，連續輸入隨機出現的10個數字，然後計算你的分數')
+    T.sleep(0.5)
     adj=str(input('請輸入難度:'))
     if adj=='easy':
         easy()
@@ -29,6 +31,8 @@ def adjust():
         baby()
     elif adj=='demon':
         demon2()
+    elif adj=='reaction':
+        reactiongame()
     else:
         print('錯誤')
         adjust()
@@ -130,14 +134,57 @@ def first():
     t1=T.time()
     game()
 #----------------------------------------------------------------------------------------------
-#遊戲跟結算
+#新模式
+def reactiongame():
+    list1=[0,1,2,3,4,5,6,7,8,9]
+    t2=r.sample(list1,10)
+        
+    error=int(0)
+    for count in range(5,0,-1):
+        print('倒數%d秒'%(count))
+        T.sleep(1)
+    time1=T.time()
+    for t in range(10):
+        
+        a=str(t2[t])
+        print('第%d題'%(t+1))
+        print(a,end="")
+        b=str(input('輸入一樣的數字:'))
+        print('')
+        if a==b:
+            continue
+        else:
+            print('error')
+            error+=1
+            continue
+        
+    time2=T.time()
+    print('花了%.2f秒'%((time2-time1)))
+    print('一共%d次錯誤'%(error))
+    print('分數:%.2f分'%((50-((time2-time1)+int(error)*2.1)*1)*2))
+    
+    c=str(input('繼續？y or n: '))
+    if c=='y':
+            reactiongame()
+    elif c=='n': 
+        print('結束!下次見:)')
+    elif c=='adj': 
+        
+        t=0
+        
+        adjust()
+    else:
+        print('錯誤')
+
+#----------------------------------------------------------------------------------------------
+#遊戲跟結算    
 def babygame():
     b=str(input('Ans:'))
     if str(a)==str(b):
         t2=T.time()        
         print('用了%.2f秒'%(t2-t1))
         T.sleep(1)
-        print('要調整難度的話請輸入adj')        
+        print('@要調整難度的話請輸入adj',end='')        
         c=str(input('繼續？y or n: '))
         if c=='y':
             global t
@@ -159,7 +206,7 @@ def demongame2():#不會跳回簡單
         t2=T.time()        
         print('用了%.2f秒'%(t2-t1))
         T.sleep(1)
-        print('要調整難度的話請輸入adj')   
+        print('@要調整難度的話請輸入adj',end='')   
         c=str(input('繼續？y or n: '))
         if c=='y':
             global t
@@ -183,7 +230,7 @@ def demongame():
     if str(a)==str(b):
         t2=T.time()        
         print('用了%.2f秒'%(t2-t1))
-        c=str(input('繼續(會跳回簡單難度)？y or n: '))
+        c=str(input('繼續(會跳回簡單難度)？y or n: ',end=''))
         if c=='y':
             global t
             t+=1
@@ -201,7 +248,7 @@ def dgame():
         t2=T.time()        
         print('用了%.2f秒'%(t2-t1))
         T.sleep(1)
-        print('要調整難度的話請輸入adj')        
+        print('@要調整難度的話請輸入adj',end='')        
         c=str(input('繼續？y or n: '))
         if c=='y':
             global t
@@ -220,13 +267,14 @@ def dgame():
     else:
         print('打錯了哈哈')
         dgame()
+#easy
 def game():  
     b=str(input('Ans:'))
     if str(a)==str(b):
         t2=T.time()
         print('用了%.2f秒'%(t2-t1))
         T.sleep(1)
-        print('要調整難度的話請輸入adj')
+        print('@要調整難度的話請輸入adj',end='')
         c=str(input('繼續？y or n: '))
         if c=='y':
             global t
@@ -255,15 +303,14 @@ def game():
         game()
 #-------------------------------------------------
 print('規則:')
-T.sleep(0.3)
+T.sleep(0.1)
 print('打出跟題目一樣的字後按enter 看你速度多快')
-
+T.sleep(0.45)
+print('先試玩簡單難度，第一關通過可以根據自己的能力調整難度')
 start=input('開始遊戲？y or n: ')
 if start=='y':
     t=int(0)
     t+=1
-    print('先試玩簡單難度，第一關通過可以根據自己的能力調整難度')
-    T.sleep(2)
     print('倒數五秒開始')
     print('5')
     T.sleep(1)
