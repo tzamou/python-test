@@ -2,79 +2,120 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Nov  5 21:26:06 2020
-
 @author: chenguanlin
 """
 import time as T
 import random as r
+#---------------------------------------------------------------------------------------------------
+#出題
+def baby():
+    str1='0123456789abcdefghijklmnopqrstuvwxyz'
+    global a,t1
+    a=r.choice(str1)+r.choice(str1)
+    print('倒數三秒開始')
+    print('3')
+    T.sleep(1)
+    print('2')
+    T.sleep(1)
+    print('1')
+    T.sleep(1)
+    print('(嬰兒難度)第%d題:'%(t),end='')
+    print(str(a))
+    t1=T.time()
+    babygame()
+
+
+
 def demon():
-        str1='0123456789!@#$%^&*-+=<>?/:;[]{}~abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        global a,t1
-        a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)
-        print('地獄級難度 :D')
-        T.sleep(0.5)
-        print('倒數五秒開始')
-        print('5')
-        T.sleep(1)
-        print('4')
-        T.sleep(1)        
-        print('3')
-        T.sleep(1)
-        print('2')
-        T.sleep(1)
-        print('1')
-        T.sleep(1)
-        print('(地獄級)第%d題:'%(t),end='')
-        print(str(a))
-        t1=T.time()
-        demongame()
+    str1='0123456789!@#$%^&*-+=<>?/:;[]{}~abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    global a,t1
+    a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)
+    print('地獄級難度 :D')
+    T.sleep(0.5)
+    print('倒數五秒開始')
+    print('5')
+    T.sleep(1)
+    print('4')
+    T.sleep(1)        
+    print('3')
+    T.sleep(1)
+    print('2')
+    T.sleep(1)
+    print('1')
+    T.sleep(1)
+    print('(地獄級)第%d題:'%(t),end='')
+    print(str(a))
+    t1=T.time()
+    demongame()
 
 
-def difficult():
-    
-        str1='0123456789!@#$%^&*-+=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        global a,t1
-        a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)
-        print('倒數三秒開始')
-        print('3')
-        T.sleep(1)
-        print('2')
-        T.sleep(1)
-        print('1')
-        T.sleep(1)
-        print('(困難)第%d題:'%(t),end='')
-        print(str(a))
-        t1=T.time()
-        dgame()
+def difficult():    
+    str1='0123456789!@#$%^&*-+=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    global a,t1
+    a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)
+    print('倒數三秒開始')
+    print('3')
+    T.sleep(1)
+    print('2')
+    T.sleep(1)
+    print('1')
+    T.sleep(1)
+    print('(困難)第%d題:'%(t),end='')
+    print(str(a))
+    t1=T.time()
+    dgame()
 
-def main2():
+def easy():
     
-        str1='0123456789abcdefghijklmnopqrstuvwxyz'
-        global a,t1
-        a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)
-        print('倒數三秒開始')
-        print('3')
-        T.sleep(1)
-        print('2')
-        T.sleep(1)
-        print('1')
-        T.sleep(1)
-        print('第%d題:'%(t),end='')
-        print(str(a))
-        t1=T.time()
-        game()
+    str1='0123456789abcdefghijklmnopqrstuvwxyz'
+    global a,t1
+    a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)
+    print('倒數三秒開始')
+    print('3')
+    T.sleep(1)
+    print('2')
+    T.sleep(1)
+    print('1')
+    T.sleep(1)
+    print('第%d題:'%(t),end='')
+    print(str(a))
+    t1=T.time()
+    game()
     
 
-def main1():
+def first():
     
-        str1='0123456789abcdefghijklmnopqrstuvwxyz'
-        global a,t1
-        a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)       
-        print('第%d題:'%(t),end='')
-        print(str(a))
-        t1=T.time()
-        game()
-   
+    str1='0123456789abcdefghijklmnopqrstuvwxyz'
+    global a,t1
+    a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)       
+    print('第%d題:'%(t),end='')
+    print(str(a))
+    t1=T.time()
+    game()
+#----------------------------------------------------------------------------------------------
+#遊戲跟結算
+def babygame():
+    b=str(input('Ans:'))
+    
+    if str(a)==str(b):
+        t2=T.time()        
+        print('用了%.2f秒'%(t2-t1))        
+        c=str(input('繼續？y or n: '))
+        if c=='y':
+            global t
+            t+=1
+            babygame()
+        elif c=='n': 
+            print('結束!下次見:)')
+        elif c=='easy':
+            print('調回簡單難度')
+            easy()
+        else:
+            print('錯誤')
+    else:
+        print('打錯了哈哈')
+        babygame()              
+    
 def demongame():
     b=str(input('Ans:'))
     
@@ -85,7 +126,7 @@ def demongame():
         if c=='y':
             global t
             t+=1
-            main2()
+            easy()
         elif c=='n': 
             print('結束!下次見:)')
         else:
@@ -112,7 +153,10 @@ def dgame():
             print('結束!下次見:)')
         elif c=='easy':
             print('恭喜發現彩蛋!獎勵:難度下降')
-            main2()
+            easy()
+        elif c=='baby':
+            print('恭喜發現彩蛋!獎勵:難度大幅下降')
+            baby()
         else:
             print('錯誤')
         
@@ -138,14 +182,17 @@ def game():
                 if di=='y':
                     difficult()
                 elif di=='n':
-                    main2()
+                    easy()
                 else:
                     print('錯誤')
             
             else:
-                main2()
+                easy()
         elif c=='n': 
             print('結束!下次見:)')
+        elif c=='baby':
+            print('恭喜發現彩蛋!獎勵:難度大幅下降')
+            baby()
         else:
             print('錯誤')
             
@@ -171,12 +218,9 @@ if start=='y':
     T.sleep(1)
     print('1')
     T.sleep(1)
-    main1()
+    first()
    
 elif start=='n':
     print('掰掰!(｀Д´)')
 else:
     print('錯誤')
-
-        
-        
