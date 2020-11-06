@@ -9,8 +9,7 @@ import random as r
 #---------------------------------------------------------------------------------------------------
 #難度調整
 def adjust():
-    
-
+    print("hi")
 #---------------------------------------------------------------------------------------------------
 #出題
 def baby():
@@ -28,9 +27,6 @@ def baby():
     print(str(a))
     t1=T.time()
     babygame()
-
-
-
 def demon():
     str1='0123456789!@#$%^&*-+=<>?/:;[]{}~abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     global a,t1
@@ -52,8 +48,6 @@ def demon():
     print(str(a))
     t1=T.time()
     demongame()
-
-
 def difficult():    
     str1='0123456789!@#$%^&*-+=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     global a,t1
@@ -69,9 +63,7 @@ def difficult():
     print(str(a))
     t1=T.time()
     dgame()
-
 def easy():
-    
     str1='0123456789abcdefghijklmnopqrstuvwxyz'
     global a,t1
     a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)
@@ -86,10 +78,7 @@ def easy():
     print(str(a))
     t1=T.time()
     game()
-    
-
 def first():
-    
     str1='0123456789abcdefghijklmnopqrstuvwxyz'
     global a,t1
     a=r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)+r.choice(str1)       
@@ -101,7 +90,6 @@ def first():
 #遊戲跟結算
 def babygame():
     b=str(input('Ans:'))
-    
     if str(a)==str(b):
         t2=T.time()        
         print('用了%.2f秒'%(t2-t1))        
@@ -120,10 +108,8 @@ def babygame():
     else:
         print('打錯了哈哈')
         babygame()              
-    
 def demongame():
     b=str(input('Ans:'))
-    
     if str(a)==str(b):
         t2=T.time()        
         print('用了%.2f秒'%(t2-t1))        
@@ -139,10 +125,8 @@ def demongame():
     else:
         print('打錯了哈哈')
         demongame()                   
-
 def dgame():  
     b=str(input('Ans:'))
-    
     if str(a)==str(b):
         t2=T.time()        
         print('用了%.2f秒'%(t2-t1))        
@@ -164,15 +148,11 @@ def dgame():
             baby()
         else:
             print('錯誤')
-        
-            
     else:
         print('打錯了哈哈')
         dgame()
-        
 def game():  
     b=str(input('Ans:'))
-    
     if str(a)==str(b):
         t2=T.time()
         print('用了%.2f秒'%(t2-t1))        
@@ -190,7 +170,6 @@ def game():
                     easy()
                 else:
                     print('錯誤')
-            
             else:
                 easy()
         elif c=='n': 
@@ -200,12 +179,10 @@ def game():
             baby()
         else:
             print('錯誤')
-            
     else:
         print('打錯了哈哈')
         game()
 #-------------------------------------------------
-
 print('規則:')
 print('打出跟題目一樣的字後按enter 看你速度多快')
 start=input('開始遊戲？y or n: ')
@@ -224,7 +201,6 @@ if start=='y':
     print('1')
     T.sleep(1)
     first()
-   
 elif start=='n':
     print('掰掰!(｀Д´)')
 else:
