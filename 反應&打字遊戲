@@ -104,7 +104,7 @@ def babygame():
         if c=='y':
             global t
             t+=1
-            babygame()
+            baby()
         elif c=='n': 
             print('結束!下次見:)')
         elif c=='easy':
