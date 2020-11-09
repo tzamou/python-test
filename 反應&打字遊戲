@@ -9,8 +9,8 @@ import random as r
 #---------------------------------------------------------------------------------------------------
 #難度調整
 def adjust():
-    print('----難度調整----')
-    print('共有三個難度')
+    print('----難度,模式選擇----')
+    print('共有四個難度,一個新玩法')
     T.sleep(0.5)
     print('easy是簡單難度，隨機刷新5個字元')
     T.sleep(0.5)
@@ -160,8 +160,10 @@ def reactiongame():
         
     time2=T.time()
     print('花了%.2f秒'%((time2-time1)))
-    print('一共%d次錯誤'%(error))
+    print('一共%d次錯誤'%(error))   
     print('分數:%.2f分'%((50-((time2-time1)+int(error)*2.1)*1)*2))
+    if error>=6:
+        print('#爛透了#')
     print('@要調整難度的話請輸入adj',end='')  
     c=str(input('繼續？y or n: '))
     if c=='y':
@@ -306,23 +308,11 @@ print('規則:')
 T.sleep(0.1)
 print('打出跟題目一樣的字後按enter 看你速度多快')
 T.sleep(0.45)
-print('先試玩簡單難度，第一關通過可以根據自己的能力調整難度')
 start=input('開始遊戲？y or n: ')
 if start=='y':
     t=int(0)
     t+=1
-    print('倒數五秒開始')
-    print('5')
-    T.sleep(1)
-    print('4')
-    T.sleep(1)
-    print('3')
-    T.sleep(1)
-    print('2')
-    T.sleep(1)
-    print('1')
-    T.sleep(1)
-    first()
+    adjust()
 elif start=='n':
     print('掰掰!(｀Д´)')
 else:
