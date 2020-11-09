@@ -120,7 +120,7 @@ def helpme():
     print('9.避免輸入a 因為程式碼會將a改成arc表示反三角函數')
     print('10.如果有複雜的代換法先代換,否則程式會死給你看\n')
     T.sleep(0.5)
-    print("微分請輸入dif \n隱函數微分請輸入imp \n定積分請輸入def \n不定積分請輸入int \n偏微分請輸入par \n多重積分請輸入mul(待更新) \n停止請輸入stop")
+    print("微分請輸入dif \n隱函數微分請輸入imp \n定積分請輸入def \n不定積分請輸入int \n偏微分請輸入par \n多重積分請輸入mul(待更新) \n停止請輸入stop\n 輸入menu來返回功能選項 \n")
     calculus()
     #提示之後要加的備忘錄
     #theta                 
@@ -159,7 +159,7 @@ def calculus():
 #--------------------------------------------------------------------------------  
 print('你好')
 T.sleep(1)
-print("微分請輸入dif \n隱函數微分請輸入imp \n定積分請輸入def \n不定積分請輸入int \n偏微分請輸入par \n多重積分請輸入mul \n停止請輸入stop \n輸入help來看提示\n")
+print("微分請輸入dif \n隱函數微分請輸入imp \n定積分請輸入def \n不定積分請輸入int \n偏微分請輸入par \n多重積分請輸入mul \n停止請輸入stop \n輸入help來看提示 \n輸入menu來返回功能選項 \n")
 T.sleep(1.2)
 calculus()
             
