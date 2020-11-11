@@ -161,7 +161,7 @@ def reactiongame():
     time2=T.time()
     print('花了%.2f秒'%((time2-time1)))
     print('一共%d次錯誤'%(error))   
-    print('分數:%.2f分'%((50-((time2-time1)+int(error)*2.1)*1)*2))
+    print('分數:%.2f分'%((50-((time2-time1)+int(error)*3.5)*1)*2.1))
     if error>=6:
         print('#爛透了#')
     print('@要調整難度的話請輸入adj',end='')  
@@ -177,6 +177,7 @@ def reactiongame():
         adjust()
     else:
         print('錯誤')
+        adjust()
 
 #----------------------------------------------------------------------------------------------
 #遊戲跟結算    
@@ -199,6 +200,7 @@ def babygame():
             adjust()
         else:
             print('錯誤')
+            adjust()
     else:
         print('打錯了哈哈')
         babygame()              
@@ -221,6 +223,7 @@ def demongame2():#不會跳回簡單
             adjust()
         else:
             print('錯誤')
+            adjust()
     else:
         print('打錯了哈哈')
         demongame()            
@@ -241,6 +244,7 @@ def demongame():
             print('結束!下次見:)')
         else:
             print('錯誤')
+            adjust()
     else:
         print('打錯了哈哈')
         demongame()                   
@@ -266,6 +270,7 @@ def dgame():
             adjust()
         else:
             print('錯誤')
+            adjust()
     else:
         print('打錯了哈哈')
         dgame()
@@ -300,6 +305,7 @@ def game():
             adjust()
         else:
             print('錯誤')
+            adjust()
     else:
         print('打錯了哈哈')
         game()
