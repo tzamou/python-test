@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov 11 20:16:46 2020
+
+@author: chenguanlin
+"""
+
+list1=[]
+num=int(input('蝸牛數:'))
+for i in range(num):
+    c=float(input('白天:'))
+    e=float(input('四天後白天:'))
+    s=float(input('晚上:'))
+    h=float(input('樹高:'))
+    day=0
+    if(c<=s):
+        print('error')
+    else:
+        while(h>0):
+            if(day<3):        
+                h=h-c           
+                if(h<=0):
+                    list1.append(day+1)
+                    continue
+                else:
+                    h=h+s
+                    day+=1
+            elif(day>=3):
+                c=c+e
+                h=h-c           
+                if(h<=0):
+                    list1.append(day+1)
+                    continue
+                else:
+                    h=h+s
+                    day+=1
+            
+    
+for j in range(num):
+    print('蝸牛%d在%d天完成'%(j+1,list1[j]))
