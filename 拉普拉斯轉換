@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov 17 23:57:08 2020
+
+@author: chenguanlin
+"""
+
+from sympy import integrate,expand,symbols,oo
+x,y,t=symbols("x y t")
+
+f=str(input('拉普拉斯轉換,請輸入函數f(t):'))
+f1=str('(%s)'%f)+str('*exp(-s*t)') 
+c=str(expand(integrate(f1.replace('^','**'), (t,0,oo))))
+d=c.replace('**','^').replace('*','').replace('log','ln')
+e=d.split(',')
+g=e[0].replace('Piecewise((','')
+print()
+print('L{f(t)}=f(s)=',g)
+
+
