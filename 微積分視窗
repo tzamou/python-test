@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov 10 10:53:34 2020
+
+@author: chenguanlin
+"""
+import tkinter as tk
+from sympy import symbols,diff,expand
+x,y=symbols('x y')
+#======================================================================================
+#函式
+def differentiation():#微分
+    fx=str(f.get())    
+    X=diff(fx.replace('^','**'),x)
+    Y=diff(fx.replace('^','**'),y)
+    if Y == 0:
+        d=str(X)
+        answer.set(d.replace('**','^').replace('*','').replace('a','arc').replace('log','ln'))
+    else:
+        d=str(-X/Y)
+        answer.set(d.replace('**','^').replace('*','').replace('a','arc').replace('log','ln').replace('zoo','請用一般微分').replace('narcn','請用一般微分'))
+
+
+
+#======================================================================================
+#視窗主體
+cal=tk.Tk()
+cal.geometry("450x600")
+cal.title("微積分計算機(詹勳國終結者)")
+#======================================================================================
+#幹話
+frame0=tk.Frame(cal)
+frame0.pack()
+a0=tk.Label(frame0,text="歡迎使用詹勳國終結者")
+a0.pack(pady=10)
+#======================================================================================
+#功能
+frame1=tk.Frame(cal)
+frame1.pack(pady=10)
+a=tk.Label(frame1,text="功能",bg='yellow')
+a.grid(row=0,column=1,padx=5,pady=5)
+
+button_dif=tk.Button(frame1,text='微分',width=10,command=differentiation)
+button_dif.grid(row=1,column=0,padx=5,pady=5)
+
+button_def=tk.Button(frame1,text='定積分',width=10,command=a)
+button_def.grid(row=1,column=1,padx=5,pady=5)
+
+button_ind=tk.Button(frame1,text='不定積分',width=10,command=a)
+button_ind.grid(row=1,column=2,padx=5,pady=5)
+
+button_par=tk.Button(frame1,text='偏微分',width=10,command=a)
+button_par.grid(row=2,column=0,padx=5,pady=5)
+
+button_mut=tk.Button(frame1,text='多重積分',width=10,command=a)
+button_mut.grid(row=2,column=1,padx=5,pady=5)
+
+#button_next=tk.Button(flame1,text='下一步',width=10,command=)
+#p.grid(row=2,column=2,padx=5,pady=5)
+
+#======================================================================================
+#輸入跟答案
+frame2=tk.Frame(cal)
+frame2.pack(pady=10)
+
+va=tk.StringVar()
+f=tk.StringVar()
+answer=tk.StringVar()
+ask=tk.StringVar()#問要對幾個變數幹嘛的
+scanf=tk.StringVar()#輸入對幾個變數怎樣的
+
+f0=tk.Label(frame2,text='請輸入函數:')
+f0.pack()
+
+entry=tk.Entry(frame2,textvariable=f)
+entry.pack()
+
+ans0=tk.Label(frame2,text='答案:')
+ans0.pack()
+
+ans=tk.Label(frame2,textvariable=answer)
+ans.pack()
+
+f1=tk.Label(frame2,textvariable=ask)
+f1.pack()
+
+entry_ask=tk.Entry(frame2,textvariable=scanf)
+
+#======================================================================================
+#help&stop
+
+#======================================================================================
+#help 上下頁
+
+
+cal.mainloop()
