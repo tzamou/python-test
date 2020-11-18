@@ -1,0 +1,170 @@
+import sympy as sp
+import time as T
+from sympy import diff,integrate,expand,symbols
+x,y=symbols("x y")
+#--------------------------------------------------------------------------------       
+
+def indefinite_integration():#不定積分
+    f=str(input('不定積分,請輸入函數f(x):'))
+    if f=='menu':
+        calculus()
+    elif f=='help':
+        helpme()
+    else:
+        b=str(expand(integrate(f.replace('^','**') ,x)))
+        b=str(sp.simplify(b))
+        print('F(x)=%s+C'%(b.replace('**','^').replace('*','').replace('log','ln').replace('Integrarcl', '自己算，程式跑不動惹(先做代換後再輸入)ＱＱ➝➝')))
+        indefinite_integration()
+
+def definite_integration():#定積分
+    f=str(input('定積分,請輸入函數f(x):'))
+    if f=='menu':
+        calculus()
+    elif f=='help':
+        helpme()
+    else:
+        c=str(expand(integrate(f.replace('^','**'), (x,str(input('下限:')),str(input('上限:'))))))
+        print('Ans: %s'%(c.replace('**','^').replace('*','').replace('log','ln')))
+        definite_integration()
+
+def differentiation():#微分
+    f=str(input('微分,請輸入函數f(x):'))
+    if f=='menu':
+        calculus()
+    elif f=='help':
+        helpme()
+    else:
+        a=str(expand(diff(f.replace('^','**'),x)))
+        a=str(sp.simplify(a))
+        print('f\'(x)=%s'%(a.replace('**','^').replace('*','').replace('log','ln')))
+        differentiation()
+
+def implicit():#隱函數微分
+    f=str(input('隱函數微分,請輸入函數f(x):'))
+    if f=='menu':
+        calculus()
+    elif f=='help':
+        
+        helpme()
+    else:
+        X=diff(f.replace('^','**'),x)
+        Y=diff(f.replace('^','**'),y)
+        if Y == 0:
+            d=str(X)
+            d=str(sp.simplify(d))
+            print("f\'(x)=%s"%(d.replace('**','^').replace('*','').replace('log','ln')))
+        else:
+            d=str(-X/Y)
+            d=str(sp.simplify(d))
+            print("f\'(x)=%s"%(d.replace('**','^').replace('*','').replace('log','ln').replace('zoo','請用一般微分').replace('narcn','請用一般微分')))
+        implicit()
+    
+def partial():#偏微分
+
+    listnum=[]
+    listvar=[]
+    f=str(input('偏微分,請輸入函數f(x):'))
+    if f=='menu':
+        calculus()
+    elif f=='help':
+        helpme()
+    else:
+        par=str(f.replace('^','**'))
+        n=int(input('要對幾個變數做偏微分:'))
+        for n in range(1,n+1):            
+            num=str(input('對第%d個變數的偏導數:'%(n)))
+            listnum.append(num)
+            e=str(expand(diff(par,num)))
+            e=str(sp.simplify(e))
+            listvar.append(e)
+        #print('▽f={ ',end='')    #梯度但只能用於曲面
+        for a in range(n):
+            
+            print('%s:%s'%(listnum[a],listvar[a].replace('**','^').replace('*','').replace('log','ln')))
+        partial()    
+
+def multiple():#多重積分
+    function=str(input('多重積分,請輸入函數f(x):'))
+    if function=='menu':
+        calculus()
+    elif function=='help':
+        helpme()
+    else:
+        multiple=int(input('幾重積分？'))
+        m=str(expand(integrate(function.replace('^','**'),(input('對誰積分：'),input('下限:'),input('上限:')) )))
+        
+        for mult in range(multiple-1):    
+            m=str(expand(integrate(m.replace('^','**'),(input('對誰積分：'),input('下限:'),input('上限:')) )))
+        print('\nAns: %s'%(m.replace('**','^').replace('*','').replace('log','ln')))        
+#def double(): 原本二重積分
+#    fubini=input('先對誰做積分？y or x:')
+#    if fubini=='y':
+#        d1=str(integrate(input('二重積分,請輸入函數f(x,y):'),(y,input('y下限:'),input('y上限:')),(x,input('x下限:'),input('x上限:'))))
+#        print('\nAns: %s'%(d1.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))
+#    elif fubini=='x':
+#        d2=str(integrate(input('二重積分,請輸入函數f(x,y):'),(x,input('x下限:'),input('x上限:')),(y,input('y下限:'),input('y上限:'))))
+#        print('\nAns: %s'%(d2.replace('**','^').replace('*','').replace('a','arc').replace('log','ln')))        
+#--------------------------------------------------------------------------------
+def helpme():
+    print('\n*****小抄*****')
+    print('1.乘方用 ^。ex:x^2代表x平方')
+    print('2.三角函數:sin,cos,tan,sec,csc,cot')
+    print('3.自然對數exp(x)表示e的x次方')
+    print('4.無限用oo表示')
+    print('5.pi代表圓周率')
+    print('6.sqrt()代表開根號')
+    print('7.I代表sqrt(-1)')
+    print('8.erf()=誤差函數')
+    print('9.三角函數前加a表示反三角函數')
+    print('10.如果有複雜的代換法先代換,否則程式會死給你看\n')
+    T.sleep(0.5)
+    print("微分請輸入dif \n隱函數微分請輸入imp \n定積分請輸入def \n不定積分請輸入int \n偏微分請輸入par \n多重積分請輸入mul(待更新) \n停止請輸入stop\n 輸入menu來返回功能選項 \n")
+    calculus()
+    #提示之後要加的備忘錄
+    #theta                 
+#--------------------------------------------------------------------------------             
+def calculus():
+       
+        choose=input('****請輸入功能****\n輸入:')
+        
+        if choose=='stop':
+            print("結束!")
+                   
+        elif choose=='help':
+            helpme()
+
+        elif choose=='dif':#微分 differentiation
+            differentiation()
+            
+        elif choose=='imp':#隱函數微分 implicit function
+            implicit()
+            
+        elif choose=='par':#偏微分,可以加入梯度座標 ▽ｆ(nabla f)＝偏x i+偏y j,i j為向量
+            partial()            
+        #∫  
+        elif choose=='def':#定積分 definite integration    
+            definite_integration()
+            
+        elif choose=='ind':#不定積分 indefinite integration
+            indefinite_integration()
+    
+        elif choose=='mul':#多重積分 multiple integrals
+            multiple()
+                       
+        else:
+            print("錯誤，請重新輸入")
+            calculus()
+#--------------------------------------------------------------------------------  
+print('你好')
+T.sleep(1)
+print("微分請輸入dif \n隱函數微分請輸入imp \n定積分請輸入def \n不定積分請輸入ind \n偏微分請輸入par \n多重積分請輸入mul \n停止請輸入stop \n輸入help來看提示 \n輸入menu來返回功能選項 \n")
+T.sleep(1.2)
+calculus()
+            
+    
+    
+    
+                
+                
+                
+                
