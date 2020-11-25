@@ -1,5 +1,6 @@
 import sympy as sp
 import time as T
+import os
 from sympy import diff,integrate,expand,symbols
 x,y=symbols("x y")
 #--------------------------------------------------------------------------------       
@@ -163,8 +164,14 @@ def calculus():
             print("錯誤，請重新輸入")
             calculus()
 #--------------------------------------------------------------------------------  
-print('你好')
+str1=['你','好',',','歡','迎','使','用','微','積','分','計','算','機']
+os.system('clear')
+T.sleep(0.5)
+for i in range(13):
+    print(str1[i],end='')
+    T.sleep(0.3)
 T.sleep(1)
+print()
 print("微分請輸入dif \n隱函數微分請輸入imp \n定積分請輸入def \n不定積分請輸入ind \n偏微分請輸入par \n多重積分請輸入mul \n停止請輸入stop \n輸入help來看提示 \n輸入menu來返回功能選項 \n")
 T.sleep(1.2)
 calculus()
