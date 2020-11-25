@@ -13,8 +13,17 @@ def indefinite_integration():#不定積分
     else:
         b=str(expand(integrate(f.replace('^','**') ,x)))
         b=str(sp.simplify(b))
-        print('F(x)=%s+C'%(b.replace('**','^').replace('*','').replace('log','ln').replace('Integrarcl', '自己算，程式跑不動惹(先做代換後再輸入)ＱＱ➝➝')))
+        
+        print('F(x)=%s+C'%(b.replace('**','^').replace('*','').replace('log','ln').replace('Integral', '請用代換法➝➝')))
+        if(b.startswith('I')):
+            u = symbols('u')
+            f0=str(input('代換法,請輸入函數f(u):'))
+            a=str(input('u='))
+            G=integrate(f0,u)
+            a=str(G.subs(u,a))
+            print('F(x)=%s+C'%(a.replace('**','^').replace('*','').replace('log','ln')))
         indefinite_integration()
+        
 
 def definite_integration():#定積分
     f=str(input('定積分,請輸入函數f(x):'))
@@ -116,7 +125,6 @@ def helpme():
     print('7.I代表sqrt(-1)')
     print('8.erf()=誤差函數')
     print('9.三角函數前加a表示反三角函數')
-    print('10.如果有複雜的代換法先代換,否則程式會死給你看\n')
     T.sleep(0.5)
     print("微分請輸入dif \n隱函數微分請輸入imp \n定積分請輸入def \n不定積分請輸入int \n偏微分請輸入par \n多重積分請輸入mul(待更新) \n停止請輸入stop\n 輸入menu來返回功能選項 \n")
     calculus()
