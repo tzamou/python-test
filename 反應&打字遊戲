@@ -6,6 +6,7 @@ Created on Thu Nov  5 21:26:06 2020
 """
 import time as T
 import random as r
+import webbrowser as web
 #---------------------------------------------------------------------------------------------------
 #難度調整
 def adjust():
@@ -322,4 +323,6 @@ if start=='y':
 elif start=='n':
     print('掰掰!(｀Д´)')
 else:
-    print('錯誤')
+    print('錯誤，給你懲罰')
+    T.sleep(1)
+    web.open('https://images.app.goo.gl/yVH7neZqcxfnTkBy7')
