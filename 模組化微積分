@@ -19,7 +19,7 @@ def implicit():#微分
     elif f=='不定積分':
         indefinite_integration()    
     elif f=='多重積分':
-            multiple()
+        multiple()
  
     else:
         X=diff(f.replace('^','**'),x)
@@ -152,25 +152,25 @@ def partial():#偏微分
         partial()    
 
 def multiple():#多重積分
-    function=str(input('多重積分,請輸入函數f(x):'))
-    if function=='help':
+    f=str(input('多重積分,請輸入函數f(x):'))
+    if f=='help':
         helpme()
-    elif function=='stop':
+    elif f=='stop':
         print('結束')
-    elif function=='微分':
+    elif f=='微分':
         implicit()
-    elif function=='參數式微分':
+    elif f=='參數式微分':
         parametric_equations()            
-    elif function=='偏微分':
+    elif f=='偏微分':
         partial()           
-    elif function=='定積分':
+    elif f=='定積分':
         definite_integration()
-    elif function=='不定積分':
+    elif f=='不定積分':
         indefinite_integration()    
 
     else:
         multiple=int(input('幾重積分？'))
-        m=str(expand(integrate(function.replace('^','**'),(input('對誰積分：'),input('下限:'),input('上限:')) )))
+        m=str(expand(integrate(f.replace('^','**'),(input('對誰積分：'),input('下限:'),input('上限:')) )))
         
         for mult in range(multiple-1):    
             m=str(expand(integrate(m.replace('^','**'),(input('對誰積分：'),input('下限:'),input('上限:')) )))
