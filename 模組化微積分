@@ -2,60 +2,25 @@ import sympy as sp
 import time as T
 import os
 from sympy import diff,integrate,expand,symbols
-x,y=symbols("x y")
+x,y,t=symbols("x y t")
 #--------------------------------------------------------------------------------       
-
-def indefinite_integration():#不定積分
-    f=str(input('不定積分,請輸入函數f(x):'))
-    if f=='menu':
-        calculus()
-    elif f=='help':
-        helpme()
-    else:
-        b=str(expand(integrate(f.replace('^','**') ,x)))
-        b=str(sp.simplify(b))
-        
-        print('F(x)=%s+C'%(b.replace('**','^').replace('*','').replace('log','ln').replace('Integral', '請用代換法➝➝')))
-        if(b.startswith('I')):
-            u = symbols('u')
-            f0=str(input('代換法,請輸入函數f(u):'))
-            a=str(input('u='))
-            G=integrate(f0,u)
-            a=str(G.subs(u,a))
-            print('F(x)=%s+C'%(a.replace('**','^').replace('*','').replace('log','ln')))
-        indefinite_integration()
-        
-
-def definite_integration():#定積分
-    f=str(input('定積分,請輸入函數f(x):'))
-    if f=='menu':
-        calculus()
-    elif f=='help':
-        helpme()
-    else:
-        c=str(expand(integrate(f.replace('^','**'), (x,str(input('下限:')),str(input('上限:'))))))
-        print('Ans: %s'%(c.replace('**','^').replace('*','').replace('log','ln')))
-        definite_integration()
-
-def differentiation():#微分
+def implicit():#微分
     f=str(input('微分,請輸入函數f(x):'))
-    if f=='menu':
-        calculus()
-    elif f=='help':
+    if f=='help':
         helpme()
-    else:
-        a=str(expand(diff(f.replace('^','**'),x)))
-        a=str(sp.simplify(a))
-        print('f\'(x)=%s'%(a.replace('**','^').replace('*','').replace('log','ln')))
-        differentiation()
-
-def implicit():#隱函數微分
-    f=str(input('隱函數微分,請輸入函數f(x):'))
-    if f=='menu':
-        calculus()
-    elif f=='help':
-        
-        helpme()
+    elif f=='stop':
+        print('結束')
+    elif f=='參數式微分':
+        parametric_equations()
+    elif f=='偏微分':
+        partial()           
+    elif f=='定積分':
+        definite_integration()
+    elif f=='不定積分':
+        indefinite_integration()    
+    elif f=='多重積分':
+            multiple()
+ 
     else:
         X=diff(f.replace('^','**'),x)
         Y=diff(f.replace('^','**'),y)
@@ -68,16 +33,109 @@ def implicit():#隱函數微分
             d=str(sp.simplify(d))
             print("f\'(x)=%s"%(d.replace('**','^').replace('*','').replace('log','ln').replace('zoo','請用一般微分').replace('narcn','請用一般微分')))
         implicit()
+        
+def parametric_equations():#參數式微分
+    fx=str(input('參數式微分,請輸入函數x(t):'))
+    fy=str(input('參數式微分,請輸入函數y(t):'))
+    if fx or fy=='help':
+        helpme()
+    elif fx or fy=='stop':
+        print('結束')
+    elif fx or fy=='微分':
+        implicit()   
+    elif fx or fy=='偏微分':
+        partial()           
+    elif fx or fy=='定積分':
+        definite_integration()
+    elif fx or fy=='不定積分':
+        indefinite_integration()    
+    elif fx or fy=='多重積分':
+            multiple()
+    else:
+        X=diff(fx.replace('^','**'),t)
+        Y=diff(fy.replace('^','**'),t)
+        
+        d=str(Y/X)
+        d=str(sp.simplify(d))
+        print("dy/dx=%s"%(d.replace('**','^').replace('*','').replace('log','ln').replace('zoo','請用一般微分').replace('narcn','請用一般微分')))
+        parametric_equations()
+        
+def indefinite_integration():#不定積分
+    f=str(input('不定積分,請輸入函數f(x):'))
+    if f=='help':
+        helpme()
+    elif f=='stop':
+        print('結束')
+    elif f=='微分':
+        implicit() 
+    elif f=='參數式微分':
+        parametric_equations()           
+    elif f=='偏微分':
+        partial()           
+    elif f=='定積分':
+        definite_integration()
+    elif f=='多重積分':
+        multiple()                                     
+    
+    else:
+        b=str(expand(integrate(f.replace('^','**') ,x)))
+        b=str(sp.simplify(b))
+        
+        print('∫f(x)dx=%s+C'%(b.replace('**','^').replace('*','').replace('log','ln').replace('Integral', '請用代換法➝➝')))
+        if(b.startswith('I')):
+            u = symbols('u')
+            f0=str(input('代換法,請輸入函數f(u):'))
+            a=str(input('u='))
+            G=integrate(f0,u)
+            a=str(G.subs(u,a))
+            print('F(x)=%s+C'%(a.replace('**','^').replace('*','').replace('log','ln')))
+        indefinite_integration()
+        
+
+def definite_integration():#定積分
+    f=str(input('定積分,請輸入函數f(x):'))
+    if f=='help':
+        helpme()
+    elif f=='stop':
+        print('結束')
+    elif f=='微分':
+        implicit()
+    elif f=='參數式微分':
+        parametric_equations()            
+    elif f=='偏微分':
+        partial()           
+    elif f=='不定積分':
+        indefinite_integration()    
+    elif f=='多重積分':
+        multiple()   
+    
+        
+    else:
+        c=str(expand(integrate(f.replace('^','**'), (x,str(input('下限:')),str(input('上限:'))))))
+        print('Ans: %s'%(c.replace('**','^').replace('*','').replace('log','ln')))
+        
+        definite_integration()
+
     
 def partial():#偏微分
 
     listnum=[]
     listvar=[]
     f=str(input('偏微分,請輸入函數f(x):'))
-    if f=='menu':
-        calculus()
-    elif f=='help':
+    if f=='help':
         helpme()
+    elif f=='stop':
+        print('結束')
+    elif f=='微分':
+        implicit()
+    elif f=='參數式微分':
+        parametric_equations()                  
+    elif f=='定積分':
+        definite_integration()
+    elif f=='不定積分':
+        indefinite_integration()    
+    elif f=='多重積分':
+        multiple()
     else:
         par=str(f.replace('^','**'))
         n=int(input('要對幾個變數做偏微分:'))
@@ -95,10 +153,21 @@ def partial():#偏微分
 
 def multiple():#多重積分
     function=str(input('多重積分,請輸入函數f(x):'))
-    if function=='menu':
-        calculus()
-    elif function=='help':
+    if function=='help':
         helpme()
+    elif function=='stop':
+        print('結束')
+    elif function=='微分':
+        implicit()
+    elif function=='參數式微分':
+        parametric_equations()            
+    elif function=='偏微分':
+        partial()           
+    elif function=='定積分':
+        definite_integration()
+    elif function=='不定積分':
+        indefinite_integration()    
+
     else:
         multiple=int(input('幾重積分？'))
         m=str(expand(integrate(function.replace('^','**'),(input('對誰積分：'),input('下限:'),input('上限:')) )))
@@ -127,7 +196,7 @@ def helpme():
     print('8.erf()=誤差函數')
     print('9.三角函數前加a表示反三角函數')
     T.sleep(0.5)
-    print("微分請輸入dif \n隱函數微分請輸入imp \n定積分請輸入def \n不定積分請輸入int \n偏微分請輸入par \n多重積分請輸入mul(待更新) \n停止請輸入stop\n 輸入menu來返回功能選項 \n")
+    
     calculus()
     #提示之後要加的備忘錄
     #theta                 
@@ -141,24 +210,24 @@ def calculus():
                    
         elif choose=='help':
             helpme()
-
-        elif choose=='dif':#微分 differentiation
-            differentiation()
             
-        elif choose=='imp':#隱函數微分 implicit function
+        elif choose=='微分':#微分跟隱函數微分
             implicit()
-            
-        elif choose=='par':#偏微分,可以加入梯度座標 ▽ｆ(nabla f)＝偏x i+偏y j,i j為向量
+        elif choose=='參數式微分':#參數式微分
+            parametric_equations()    
+        
+        elif choose=='偏微分':#偏微分,可以加入梯度座標 ▽ｆ(nabla f)＝偏x i+偏y j,i j為向量
             partial()            
         #∫  
-        elif choose=='def':#定積分 definite integration    
+        elif choose=='定積分':#定積分 definite integration    
             definite_integration()
             
-        elif choose=='ind':#不定積分 indefinite integration
+        elif choose=='不定積分':#不定積分 indefinite integration
             indefinite_integration()
     
-        elif choose=='mul':#多重積分 multiple integrals
+        elif choose=='多重積分':#多重積分 multiple integrals
             multiple()
+        
                        
         else:
             print("錯誤，請重新輸入")
@@ -171,15 +240,7 @@ for i in range(13):
     print(str1[i],end='')
     T.sleep(0.3)
 T.sleep(1)
-print()
-print("微分請輸入dif \n隱函數微分請輸入imp \n定積分請輸入def \n不定積分請輸入ind \n偏微分請輸入par \n多重積分請輸入mul \n停止請輸入stop \n輸入help來看提示 \n輸入menu來返回功能選項 \n")
-T.sleep(1.2)
+print("\n")
+print("可以輸入微分、參數式微分、不定積分、定積分、偏微分、多重積分來做相對應的計算 \n\n停止請輸入stop \n輸入help來看提示 \n")
+T.sleep(1)
 calculus()
-            
-    
-    
-    
-                
-                
-                
-                
