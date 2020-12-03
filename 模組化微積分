@@ -37,19 +37,19 @@ def implicit():#微分
 def parametric_equations():#參數式微分
     fx=str(input('參數式微分,請輸入函數x(t):'))
     fy=str(input('參數式微分,請輸入函數y(t):'))
-    if fx or fy=='help':
+    if (fx or fy =='help'):
         helpme()
-    elif fx or fy=='stop':
+    elif (fx or fy =='stop'):
         print('結束')
-    elif fx or fy=='微分':
+    elif (fx or fy =='微分'):
         implicit()   
-    elif fx or fy=='偏微分':
+    elif (fx or fy =='偏微分'):
         partial()           
-    elif fx or fy=='定積分':
+    elif (fx or fy =='定積分'):
         definite_integration()
-    elif fx or fy=='不定積分':
+    elif (fx or fy =='不定積分'):
         indefinite_integration()    
-    elif fx or fy=='多重積分':
+    elif (fx or fy =='多重積分'):
             multiple()
     else:
         X=diff(fx.replace('^','**'),t)
