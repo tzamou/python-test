@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov 24 16:58:53 2020
+
+@author: chenguanlin
+"""
+
+
+'''from turtle import *
+penup()
+goto(0,-175)
+pendown()
+color('red','yellow')
+
+begin_fill()
+circle(150,180,100)
+left(180)
+circle(150,180,100)
+end_fill()'''
+
+
+import turtle as tu
+tu.speed(20)
+tu.penup()
+tu.goto(-30,-70)
+tu.pendown()
+tu.left(-90)
+a=6
+for i in range(a):
+    tu.forward(75)
+    tu.left(90)
+    tu.forward(75)
+    tu.left(90)
+    tu.forward(75)
+    tu.left(90)
+    tu.forward(75)
+    tu.left(-120)
+    tu.forward(45)
+    tu.left(-60)
+    tu.forward(75)
+    tu.left(-120)
+    tu.forward(45)
+    tu.left(30)
+    tu.forward(75)
+    tu.left(150)
+    tu.forward(45)
+    tu.left(30)
+    tu.forward(75)
+    tu.left(-(180-(360/a)))
+tu.done()
+
