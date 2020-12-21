@@ -1,0 +1,130 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Dec 20 19:36:31 2020
+
+@author: admin
+"""
+from tkinter import *
+from PIL import Image,ImageTk
+from sympy import diff,integrate,expand,symbols,pprint
+import sympy as sp
+from pygame import mixer
+x,y,t=symbols("x y t")
+#=======================================================
+#視窗
+cal=Tk()
+cal.iconbitmap("cal.ico")
+cal.title("微積分計算機")
+#=======================================================
+#視窗置中上
+sw=cal.winfo_screenwidth()
+sh=cal.winfo_screenheight()
+w=1061
+h=660
+between0=(sw-w)/2
+between1=(sh-h)/2
+cal.geometry("%dx%d+%d+%d"%(w,h,between0,between1-75))
+
+#=======================================================
+#背景
+img=Image.open("bg.png")
+bg=ImageTk.PhotoImage(img)
+bg1=Label(cal,image=bg)
+bg1.pack()
+
+#=======================================================
+#bgm
+mixer.init()
+mixer.music.load('BGM.mp3')
+mixer.music.play(-1)
+
+#=======================================================
+#按鈕函式
+
+def imp():
+    f=str(f0.get())
+    X=diff(f.replace('^','**'),x)
+    Y=diff(f.replace('^','**'),y)
+    if Y == 0:
+        d=str(X)
+        d0=str(sp.simplify(d))
+        A.set(d0.replace('**','^').replace('*','').replace('log','ln'))
+        ans.place(x=685,y=100)
+        func_entry.delete(0,END)
+    else:
+        d=str(-X/Y)
+        d0=str(sp.simplify(d))
+        A.set(d0.replace('**','^').replace('*','').replace('log','ln'))
+        ans.place(x=685,y=100)
+        func_entry.delete(0,END)
+
+#=======================================================
+#說明
+description_bg='#%02x%02x%02x'%(74,108,109)
+description=Label(cal,justify='left',bg=description_bg)
+description.config(text='✰✰ 你好! ✰✰\n歡迎使用微積分計算機\n可以輸入微分、參數式微分、不定積分、定積分、偏微分、多重積分來做相對應的計算\n\n**請在上方輸入函數**')
+#description.after(1000)
+#description.config(text='')
+description.place(x=36,y=510)
+
+#=======================================================
+#按鈕
+b1=Button(cal,text='計算',command=cal.destroy,height=2,width=23,font=1,cursor='hand2')
+b1.place(x=570,y=510)
+
+b2=Button(cal,text='提示',command=cal.destroy,height=2,width=23,font=1,cursor='heart')
+b2.place(x=810,y=510)
+
+b3=Button(cal,text='忘記要讓這顆按鈕幹嘛了',command=cal.destroy,height=2,width=23,font=1,cursor='hand2')
+b3.place(x=570,y=575)
+
+b4=Button(cal,text='逃跑',command=cal.destroy,height=2,width=23,font=1,cursor='hand2')
+b4.place(x=810,y=575)
+'''----------------------------------------------------'''
+def_b=Button(cal,text="微分",command=imp)
+def_b.place(x=100,y=200)
+#=======================================================
+#輸入函數
+f0=StringVar()
+func_color='#%02x%02x%02x'%(219,218,188)
+func_label=Label(cal,text='請輸入函數:',bg=func_color,font=3)
+func_label.place(x=76,y=82)
+func_entry=Entry(cal,bg=func_color,width=50,textvariable=f0)
+func_entry.place(x=80,y=105)
+#entryname.delete(0,END)可以刪除字串所有東西
+
+#=======================================================
+#提示
+prompt=Label(cal,text='提示',font=20,bg=func_color)
+#prompt.place(x=780,y=325)
+
+#=======================================================
+#答案
+A=StringVar()
+ans=Label(cal,width=30,height=10,textvariable=A)
+#ans.place(x=685,y=100)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cal.mainloop()
