@@ -60,25 +60,51 @@ def imp():
         ans=Label(cal,height=150,width=310,image=ANS)
         ans.place(x=635,y=90)
         func_entry.delete(0,END)
-#++++++++++++++++++++++++++++++++++        
+#++++++++++++++++++++++++++++++++++  參數      
 def parametric_equations():#顯示元件
     del_definite()
+    text.place(x=-800,y=125)
     func_label.place(x=-760,y=82)
     func_entry.place(x=-800,y=105)
     parx_label.place(x=76,y=79)
     pary_label.place(x=76,y=102)
-    par_x.place(x=95,y=82)
-    par_y.place(x=95,y=105)
-    
+    par_x.place(x=108,y=82)
+    par_y.place(x=108,y=105)
+    par_button.place(x=108,y=128)
 def del_par():
     par_x.place(x=-760,y=82)
     par_y.place(x=-760,y=82)
+    text.place(x=80,y=125)
     parx_label.place(x=-760,y=82)
     pary_label.place(x=-760,y=82)
+    par_button.place(x=-1080,y=128)
     func_label.place(x=76,y=82)
     func_entry.place(x=80,y=105)
-
-#++++++++++++++++++++++++++++++++++     
+def par_ans():
+    tx=str(parx.get())
+    ty=str(pary.get())
+    X=diff(tx.replace('^','**'),t)
+    Y=diff(ty.replace('^','**'),t)
+    X=expand(X)
+    Y=expand(Y)
+    b=latex(Y/X)
+    x=0
+    y=0
+    fig=plt.figure()
+    plt.plot(x,y)
+    plt.text(-0.005,-0.005,r"$\frac{dy}{dx}=%s$"%b,horizontalalignment='center',fontsize=20)  
+    
+    F0.set("Q:%s"%(f0.get().replace("**","^")))
+    
+    fig.savefig('ans.png')       
+    aimg=Image.open("ans.png")
+    ANS=ImageTk.PhotoImage(aimg)
+    ans=Label(cal,height=150,width=310,image=ANS)
+    ans.place(x=635,y=90)
+    par_x.delete(0,END)
+    par_y.delete(0,END)
+    
+#++++++++++++++++++++++++++++++++++     不定
 def ind():
     x,y=symbols("x y")
     f=str(f0.get())
@@ -88,7 +114,7 @@ def ind():
     y=0
     fig=plt.figure()
     plt.plot(x,y)
-    plt.text(-0.005,-0.005,r"$%s+C$"%b,horizontalalignment='center',fontsize=20)  
+    plt.text(-0.005,-0.005,r"$\int f(x)dx=%s+C$"%b,horizontalalignment='center',fontsize=20)  
     
     F0.set("Q:%s"%(f0.get().replace("**","^")))
     
@@ -98,7 +124,7 @@ def ind():
     ans=Label(cal,height=150,width=310,image=ANS)
     ans.place(x=635,y=90)
     func_entry.delete(0,END)
-#++++++++++++++++++++++++++++++++++        
+#++++++++++++++++++++++++++++++++++    定積分    
 def definite():#顯示元件
     del_par()    
     up_label.place(x=48,y=188)
@@ -144,6 +170,7 @@ def cal_return():#初始化
     del_par()
     func_label.place(x=76,y=82)
     func_entry.place(x=80,y=105)
+    text.place(x=80,y=125)
 def stop():
     cal.destroy()
     mixer.music.stop()
@@ -228,10 +255,11 @@ def_button=Button(cal,text='計算',bg=green_color,command=definite_ans)
 #參數式微分
 parx=StringVar()
 pary=StringVar()
-par_x=Entry(cal,width=30,textvariable=parx,bg=ans_color)
-par_y=Entry(cal,width=30,textvariable=pary,bg=ans_color)
-parx_label=Label(cal,text='x=',bg=func_color)
-pary_label=Label(cal,text='y=',bg=func_color)
+par_x=Entry(cal,width=30,textvariable=parx,bg=func_color)
+par_y=Entry(cal,width=30,textvariable=pary,bg=func_color)
+parx_label=Label(cal,text='x(t)=',bg=func_color)
+pary_label=Label(cal,text='y(t)=',bg=func_color)
+par_button=Button(cal,text='計算',command=par_ans,bg=func_color)
 
 
 #=======================================================
