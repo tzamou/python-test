@@ -60,7 +60,25 @@ def imp():
         ans=Label(cal,height=150,width=310,image=ANS)
         ans.place(x=635,y=90)
         func_entry.delete(0,END)
-        
+#++++++++++++++++++++++++++++++++++        
+def parametric_equations():#顯示元件
+    del_definite()
+    func_label.place(x=-760,y=82)
+    func_entry.place(x=-800,y=105)
+    parx_label.place(x=76,y=79)
+    pary_label.place(x=76,y=102)
+    par_x.place(x=95,y=82)
+    par_y.place(x=95,y=105)
+    
+def del_par():
+    par_x.place(x=-760,y=82)
+    par_y.place(x=-760,y=82)
+    parx_label.place(x=-760,y=82)
+    pary_label.place(x=-760,y=82)
+    func_label.place(x=76,y=82)
+    func_entry.place(x=80,y=105)
+
+#++++++++++++++++++++++++++++++++++     
 def ind():
     x,y=symbols("x y")
     f=str(f0.get())
@@ -80,13 +98,20 @@ def ind():
     ans=Label(cal,height=150,width=310,image=ANS)
     ans.place(x=635,y=90)
     func_entry.delete(0,END)
-        
-def definite():    
+#++++++++++++++++++++++++++++++++++        
+def definite():#顯示元件
+    del_par()    
     up_label.place(x=48,y=188)
     up_entry.place(x=80,y=190)
     down_label.place(x=48,y=208)
     down_entry.place(x=80,y=210) 
     def_button.place(x=80,y=230)
+def del_definite():
+    up_label.place(x=-480,y=188)
+    up_entry.place(x=-800,y=190)
+    down_label.place(x=-480,y=208)
+    down_entry.place(x=-800,y=210) 
+    def_button.place(x=-800,y=230)
 def definite_ans():
     x,y=symbols("x y")
     f=str(f0.get())
@@ -110,13 +135,15 @@ def definite_ans():
     func_entry.delete(0,END)
     up_entry.delete(0,END) 
     down_entry.delete(0,END) 
-    
-    up_label.place(x=-480,y=188)
-    up_entry.place(x=-800,y=190)
-    down_label.place(x=-480,y=208)
-    down_entry.place(x=-800,y=210) 
-    def_button.place(x=-800,y=230)   
+    del_definite()
+#++++++++++++++++++++++++++++++++++   
+
 #*******************************************#
+def cal_return():#初始化
+    del_definite()
+    del_par()
+    func_label.place(x=76,y=82)
+    func_entry.place(x=80,y=105)
 def stop():
     cal.destroy()
     mixer.music.stop()
@@ -155,7 +182,7 @@ mixer.music.play(-1)
 #說明
 description_bg='#%02x%02x%02x'%(74,108,109)
 description=Label(cal,justify='left',bg=description_bg)
-description.config(text='✰✰ 你好! ✰✰\n歡迎使用微積分計算機\n可以輸入微分、參數式微分、不定積分、定積分、偏微分、多重積分來做相對應的計算\n\n**請在上方輸入函數**')
+description.config(text='✰✰ 你好! ✰✰\n歡迎使用微積分計算機\n\n可以輸入微分、參數式微分、偏微分、\n不定積分、定積分、多重積分來做相對應的計算',font=1,fg='white')
 #description.after(1000)
 #description.config(text='')
 description.place(x=36,y=510)
@@ -178,7 +205,7 @@ b4.place(x=810,y=575)
 
 def_b=Button(cal,text="微分",command=imp,bg=func_color,width=8)
 ind_b=Button(cal,text="不定積分",command=ind,bg=func_color,width=8)
-pe_b=Button(cal,text="參數式微分",bg=func_color,width=8)
+pe_b=Button(cal,text="參數式微分",command=parametric_equations,bg=func_color,width=8)
 de_b=Button(cal,text="定積分",command=definite,bg=func_color,width=8)
 par_b=Button(cal,text="偏微分",bg=func_color,width=8)
 mul_b=Button(cal,text="多重積分",bg=func_color,width=8)
@@ -198,7 +225,13 @@ down_label=Label(cal,text='下限:',bg=ans_color)
 up_entry=Entry(cal,width=30,textvariable=up0,bg=ans_color)#上限
 down_entry=Entry(cal,width=30,textvariable=down0,bg=ans_color)#下限
 def_button=Button(cal,text='計算',bg=green_color,command=definite_ans)
-
+#參數式微分
+parx=StringVar()
+pary=StringVar()
+par_x=Entry(cal,width=30,textvariable=parx,bg=ans_color)
+par_y=Entry(cal,width=30,textvariable=pary,bg=ans_color)
+parx_label=Label(cal,text='x=',bg=func_color)
+pary_label=Label(cal,text='y=',bg=func_color)
 
 
 #=======================================================
@@ -214,11 +247,12 @@ text.place(x=80,y=125)
 
 #=======================================================
 #答案
-
 答案=Label(cal,bitmap='warning',compound='right',text='ANS ',font=25,bg=ans_color,fg='blue')
 答案.place(x=770,y=63)
-
-
+#=======================================================
+#返回按鈕
+返回=Button(cal,text='返回(測試)',command=cal_return)
+返回.place(x=500,y=300)
 
    
 
