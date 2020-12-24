@@ -6,10 +6,120 @@ Created on Sun Dec 20 19:36:31 2020
 """
 from tkinter import *
 from PIL import Image,ImageTk
-from sympy import diff,integrate,expand,symbols,pprint
-import sympy as sp
+from sympy import diff,integrate,expand,symbols,latex
 from pygame import mixer
+import matplotlib.pyplot as plt
 x,y,t=symbols("x y t")
+  
+#=======================================================
+#按鈕函式
+def calculator():#功能按鈕
+    def_b.place(x=650,y=340)#微分
+    pe_b.place(x=750,y=340)#參數式微分
+    par_b.place(x=850,y=340)#偏微分
+    ind_b.place(x=650,y=380)#不定積分
+    de_b.place(x=750,y=380)#定積分   
+    mul_b.place(x=850,y=380)#多重積分
+#*******************************************#
+def imp():
+    x,y=symbols("x y")
+    f=str(f0.get())
+    X=diff(f.replace('^','**'),x)
+    X=expand(X)
+    Y=diff(f.replace('^','**'),y)
+    Y=expand(Y)
+    if Y == 0:
+        b=latex(X)
+        x=0
+        y=0
+        fig=plt.figure()
+        plt.plot(x,y)
+        plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=20)  
+        
+        F0.set("Q:%s"%(f0.get().replace("**","^")))
+        
+        fig.savefig('ans.png')       
+        aimg=Image.open("ans.png")
+        ANS=ImageTk.PhotoImage(aimg)
+        ans=Label(cal,height=150,width=310,image=ANS)
+        ans.place(x=635,y=90)
+        func_entry.delete(0,END)
+    else:
+        b=latex(-X/Y)
+        x=0
+        y=0
+        fig=plt.figure()
+        plt.plot(x,y)
+        plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=20)  
+        
+        F0.set("Q:%s"%(f0.get().replace("**","^")))
+        
+        fig.savefig('ans.png')        
+        aimg=Image.open("ans.png")
+        ANS=ImageTk.PhotoImage(aimg)
+        ans=Label(cal,height=150,width=310,image=ANS)
+        ans.place(x=635,y=90)
+        func_entry.delete(0,END)
+        
+def ind():
+    x,y=symbols("x y")
+    f=str(f0.get())
+    X=integrate(f.replace('^','**'),x)
+    b=latex(X)
+    x=0
+    y=0
+    fig=plt.figure()
+    plt.plot(x,y)
+    plt.text(-0.005,-0.005,r"$%s+C$"%b,horizontalalignment='center',fontsize=20)  
+    
+    F0.set("Q:%s"%(f0.get().replace("**","^")))
+    
+    fig.savefig('ans.png')       
+    aimg=Image.open("ans.png")
+    ANS=ImageTk.PhotoImage(aimg)
+    ans=Label(cal,height=150,width=310,image=ANS)
+    ans.place(x=635,y=90)
+    func_entry.delete(0,END)
+        
+def definite():    
+    up_label.place(x=48,y=188)
+    up_entry.place(x=80,y=190)
+    down_label.place(x=48,y=208)
+    down_entry.place(x=80,y=210) 
+    def_button.place(x=80,y=230)
+def definite_ans():
+    x,y=symbols("x y")
+    f=str(f0.get())
+    up1=str(down0.get())
+    down1=str(up0.get())
+    X=integrate(f.replace('^','**'),(x,up1,down1))
+    b='\int_%s^%s'%(up1,down1)+'f(x)dx='+latex(X)
+    x=0
+    y=0
+    fig=plt.figure()
+    plt.plot(x,y)
+    plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=20)  
+    
+    F0.set("Q:%s"%(f0.get().replace("**","^")))
+    
+    fig.savefig('ans.png')       
+    aimg=Image.open("ans.png")
+    ANS=ImageTk.PhotoImage(aimg)
+    ans=Label(cal,height=150,width=310,image=ANS)
+    ans.place(x=635,y=90)
+    func_entry.delete(0,END)
+    up_entry.delete(0,END) 
+    down_entry.delete(0,END) 
+    
+    up_label.place(x=-480,y=188)
+    up_entry.place(x=-800,y=190)
+    down_label.place(x=-480,y=208)
+    down_entry.place(x=-800,y=210) 
+    def_button.place(x=-800,y=230)   
+#*******************************************#
+def stop():
+    cal.destroy()
+    mixer.music.stop()
 #=======================================================
 #視窗
 cal=Tk()
@@ -31,32 +141,15 @@ img=Image.open("bg.png")
 bg=ImageTk.PhotoImage(img)
 bg1=Label(cal,image=bg)
 bg1.pack()
-
+#color
+ans_color='#%02x%02x%02x'%(189,212,169)#綠色深色條紋
+func_color='#%02x%02x%02x'%(219,218,188)#淺咖啡色
+green_color='#%02x%02x%02x'%(199,222,193)#綠色淺色條紋
 #=======================================================
 #bgm
 mixer.init()
 mixer.music.load('BGM.mp3')
 mixer.music.play(-1)
-
-#=======================================================
-#按鈕函式
-
-def imp():
-    f=str(f0.get())
-    X=diff(f.replace('^','**'),x)
-    Y=diff(f.replace('^','**'),y)
-    if Y == 0:
-        d=str(X)
-        d0=str(sp.simplify(d))
-        A.set(d0.replace('**','^').replace('*','').replace('log','ln'))
-        ans.place(x=685,y=100)
-        func_entry.delete(0,END)
-    else:
-        d=str(-X/Y)
-        d0=str(sp.simplify(d))
-        A.set(d0.replace('**','^').replace('*','').replace('log','ln'))
-        ans.place(x=685,y=100)
-        func_entry.delete(0,END)
 
 #=======================================================
 #說明
@@ -66,32 +159,47 @@ description.config(text='✰✰ 你好! ✰✰\n歡迎使用微積分計算機\n
 #description.after(1000)
 #description.config(text='')
 description.place(x=36,y=510)
+#top=Toplevel(cal)
 
 #=======================================================
 #按鈕
-b1=Button(cal,text='計算',command=cal.destroy,height=2,width=23,font=1,cursor='hand2')
+b1=Button(cal,text='計算',command=calculator,height=2,width=23,font=1,cursor='hand2')
 b1.place(x=570,y=510)
 
 b2=Button(cal,text='提示',command=cal.destroy,height=2,width=23,font=1,cursor='heart')
 b2.place(x=810,y=510)
 
-b3=Button(cal,text='忘記要讓這顆按鈕幹嘛了',command=cal.destroy,height=2,width=23,font=1,cursor='hand2')
+b3=Button(cal,text='設定',command=cal.destroy,height=2,width=23,font=1,cursor='hand2')#改音樂,字體大小
 b3.place(x=570,y=575)
 
-b4=Button(cal,text='逃跑',command=cal.destroy,height=2,width=23,font=1,cursor='hand2')
+b4=Button(cal,text='逃跑',command=stop,height=2,width=23,font=1,cursor='hand2')
 b4.place(x=810,y=575)
 '''----------------------------------------------------'''
-def_b=Button(cal,text="微分",command=imp)
-def_b.place(x=100,y=200)
+
+def_b=Button(cal,text="微分",command=imp,bg=func_color,width=8)
+ind_b=Button(cal,text="不定積分",command=ind,bg=func_color,width=8)
+pe_b=Button(cal,text="參數式微分",bg=func_color,width=8)
+de_b=Button(cal,text="定積分",command=definite,bg=func_color,width=8)
+par_b=Button(cal,text="偏微分",bg=func_color,width=8)
+mul_b=Button(cal,text="多重積分",bg=func_color,width=8)
 #=======================================================
 #輸入函數
 f0=StringVar()
-func_color='#%02x%02x%02x'%(219,218,188)
+up0=StringVar()
+down0=StringVar()
+
 func_label=Label(cal,text='請輸入函數:',bg=func_color,font=3)
 func_label.place(x=76,y=82)
 func_entry=Entry(cal,bg=func_color,width=50,textvariable=f0)
 func_entry.place(x=80,y=105)
-#entryname.delete(0,END)可以刪除字串所有東西
+#定積分
+up_label=Label(cal,text='上限:',bg=ans_color)
+down_label=Label(cal,text='下限:',bg=ans_color)
+up_entry=Entry(cal,width=30,textvariable=up0,bg=ans_color)#上限
+down_entry=Entry(cal,width=30,textvariable=down0,bg=ans_color)#下限
+def_button=Button(cal,text='計算',bg=green_color,command=definite_ans)
+
+
 
 #=======================================================
 #提示
@@ -99,11 +207,20 @@ prompt=Label(cal,text='提示',font=20,bg=func_color)
 #prompt.place(x=780,y=325)
 
 #=======================================================
-#答案
-A=StringVar()
-ans=Label(cal,width=30,height=10,textvariable=A)
-#ans.place(x=685,y=100)
+#紀錄
+F0=StringVar()
+text=Label(cal,textvariable=F0,width=40,bg=func_color,anchor='w')
+text.place(x=80,y=125)
 
+#=======================================================
+#答案
+
+答案=Label(cal,bitmap='warning',compound='right',text='ANS ',font=25,bg=ans_color,fg='blue')
+答案.place(x=770,y=63)
+
+
+
+   
 
 
 
