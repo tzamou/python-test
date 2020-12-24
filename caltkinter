@@ -10,7 +10,7 @@ from sympy import diff,integrate,expand,symbols,latex
 from pygame import mixer
 import matplotlib.pyplot as plt
 x,y,t=symbols("x y t")
-  
+M=1#多重積分記數
 #=======================================================
 #按鈕函式
 def calculator():#功能按鈕
@@ -63,6 +63,8 @@ def imp():
 #++++++++++++++++++++++++++++++++++  參數      
 def parametric_equations():#顯示元件
     del_definite()
+    del_partial()
+    del_multiple()
     text.place(x=-800,y=125)
     func_label.place(x=-760,y=82)
     func_entry.place(x=-800,y=105)
@@ -103,7 +105,42 @@ def par_ans():
     ans.place(x=635,y=90)
     par_x.delete(0,END)
     par_y.delete(0,END)
+#++++++++++++++++++++++++++++++++++   偏微分
+def partial():#顯示元件
+    del_par()
+    del_definite()
+    del_multiple()
+    clear_button.place(x=200,y=78)
+    partial_label.place(x=285,y=80)
+    partial_entry.place(x=390,y=82)
+    partial_button.place(x=80,y=190)
     
+def del_partial():
+    clear_button.place(x=-2500,y=80)
+    partial_label.place(x=-2850,y=80)
+    partial_entry.place(x=-3900,y=82)
+    partial_button.place(x=-800,y=230)        
+def partial_ans():
+    x,y=symbols("x y")
+    f=str(f0.get())
+    X=diff(f.replace('^','**'),partial.get())
+    b=latex(X)
+    x=0
+    y=0
+    fig=plt.figure()
+    plt.plot(x,y)
+    plt.text(-0.005,-0.005,r"$\frac{\partial f}{\partial %s}=%s$"%(partial.get(),b),horizontalalignment='center',fontsize=20)  
+    
+    F0.set("Q:%s"%(f0.get().replace("**","^")))
+    
+    fig.savefig('ans.png')       
+    aimg=Image.open("ans.png")
+    ANS=ImageTk.PhotoImage(aimg)
+    ans=Label(cal,height=150,width=310,image=ANS)
+    ans.place(x=635,y=90)
+    partial_entry.delete(0,END)
+def partial_clear():
+    func_entry.delete(0,END)
 #++++++++++++++++++++++++++++++++++     不定
 def ind():
     x,y=symbols("x y")
@@ -126,7 +163,9 @@ def ind():
     func_entry.delete(0,END)
 #++++++++++++++++++++++++++++++++++    定積分    
 def definite():#顯示元件
-    del_par()    
+    del_par()
+    del_partial()
+    del_multiple()
     up_label.place(x=48,y=188)
     up_entry.place(x=80,y=190)
     down_label.place(x=48,y=208)
@@ -161,13 +200,64 @@ def definite_ans():
     func_entry.delete(0,END)
     up_entry.delete(0,END) 
     down_entry.delete(0,END) 
-    del_definite()
-#++++++++++++++++++++++++++++++++++   
+#++++++++++++++++++++++++++++++++++多重
 
+def multiple():#顯示元件
+    del_definite()
+    del_par()
+    del_partial()
+    mul_up_label.place(x=48,y=188)
+    mul_down_label.place(x=48,y=208)
+    mul_who_label.place(x=48,y=228)
+    mul_up_entry.place(x=80,y=190)
+    mul_down_entry.place(x=80,y=210)
+    mul_who_entry.place(x=105,y=230)
+    mul_button.place(x=80,y=250)
+def del_multiple():
+    mul_up_label.place(x=-480,y=188)
+    mul_up_entry.place(x=-800,y=190)
+    mul_who_label.place(x=-480,y=228)
+    mul_down_label.place(x=-480,y=208)
+    mul_down_entry.place(x=-800,y=210) 
+    mul_who_entry.place(x=-800,y=230)
+    mul_button.place(x=-800,y=230)
+    func_entry.delete(0,END)
+    global M
+    M=1
+    mul_button['text']='第%d重積分'%M      
+def multiple_ans():
+    x,y=symbols("x y")
+    f=str(f0.get())
+    up1=str(mdown.get())
+    down1=str(mup.get())    
+    X=integrate(f.replace('^','**'),(mwho.get(),up1,down1))
+    b='\int_{%s}^{%s}'%(up1.replace('**','^').replace('*',''),down1.replace('**','^').replace('*',''))+'f(x)='+latex(X)
+    x=0
+    y=0
+    fig=plt.figure()
+    plt.plot(x,y)
+    plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=20)  
+    
+    F0.set("Q:%s"%(f0.get().replace("**","^")))
+    
+    fig.savefig('ans.png')       
+    aimg=Image.open("ans.png")
+    ANS=ImageTk.PhotoImage(aimg)
+    ans=Label(cal,height=150,width=310,image=ANS)
+    ans.place(x=635,y=90)
+    f0.set(X)
+    mul_up_entry.delete(0,END) 
+    mul_down_entry.delete(0,END)
+    mul_who_entry.delete(0,END)
+    global M
+    M+=1
+    mul_button['text']='第%d重積分'%M
 #*******************************************#
 def cal_return():#初始化
     del_definite()
     del_par()
+    del_partial()
+    del_multiple()
     func_label.place(x=76,y=82)
     func_entry.place(x=80,y=105)
     text.place(x=80,y=125)
@@ -226,32 +316,32 @@ b2.place(x=810,y=510)
 b3=Button(cal,text='設定',command=cal.destroy,height=2,width=23,font=1,cursor='hand2')#改音樂,字體大小
 b3.place(x=570,y=575)
 
-b4=Button(cal,text='逃跑',command=stop,height=2,width=23,font=1,cursor='hand2')
+b4=Button(cal,text='逃跑(廢物)',command=stop,height=2,width=23,font=1,cursor='hand2')
 b4.place(x=810,y=575)
 '''----------------------------------------------------'''
 
-def_b=Button(cal,text="微分",command=imp,bg=func_color,width=8)
-ind_b=Button(cal,text="不定積分",command=ind,bg=func_color,width=8)
-pe_b=Button(cal,text="參數式微分",command=parametric_equations,bg=func_color,width=8)
-de_b=Button(cal,text="定積分",command=definite,bg=func_color,width=8)
-par_b=Button(cal,text="偏微分",bg=func_color,width=8)
-mul_b=Button(cal,text="多重積分",bg=func_color,width=8)
+def_b=Button(cal,text="微分",command=imp,bg=func_color,width=8,cursor='hand2')
+ind_b=Button(cal,text="不定積分",command=ind,bg=func_color,width=8,cursor='hand2')
+pe_b=Button(cal,text="參數式微分",command=parametric_equations,bg=func_color,width=8,cursor='hand2')
+de_b=Button(cal,text="定積分",command=definite,bg=func_color,width=8,cursor='hand2')
+par_b=Button(cal,text="偏微分",command=partial,bg=func_color,width=8,cursor='hand2')
+mul_b=Button(cal,text="多重積分",command=multiple,bg=func_color,width=8,cursor='hand2')
 #=======================================================
 #輸入函數
 f0=StringVar()
-up0=StringVar()
-down0=StringVar()
 
 func_label=Label(cal,text='請輸入函數:',bg=func_color,font=3)
 func_label.place(x=76,y=82)
 func_entry=Entry(cal,bg=func_color,width=50,textvariable=f0)
 func_entry.place(x=80,y=105)
 #定積分
+up0=StringVar()
+down0=StringVar()
 up_label=Label(cal,text='上限:',bg=ans_color)
 down_label=Label(cal,text='下限:',bg=ans_color)
 up_entry=Entry(cal,width=30,textvariable=up0,bg=ans_color)#上限
 down_entry=Entry(cal,width=30,textvariable=down0,bg=ans_color)#下限
-def_button=Button(cal,text='計算',bg=green_color,command=definite_ans)
+def_button=Button(cal,text='計算',bg=green_color,command=definite_ans,cursor='hand2')
 #參數式微分
 parx=StringVar()
 pary=StringVar()
@@ -259,9 +349,24 @@ par_x=Entry(cal,width=30,textvariable=parx,bg=func_color)
 par_y=Entry(cal,width=30,textvariable=pary,bg=func_color)
 parx_label=Label(cal,text='x(t)=',bg=func_color)
 pary_label=Label(cal,text='y(t)=',bg=func_color)
-par_button=Button(cal,text='計算',command=par_ans,bg=func_color)
-
-
+par_button=Button(cal,text='計算',command=par_ans,bg=func_color,cursor='hand2')
+#偏微分
+partial=StringVar()
+partial_entry=Entry(cal,width=5,textvariable=partial,bg=func_color)
+partial_label=Label(cal,text='對哪個變數偏微分:',bg=func_color)
+partial_button=Button(cal,text="計算",command=partial_ans,bg=green_color,cursor='hand2')
+clear_button=Button(cal,text='清空函數',command=partial_clear,bg=func_color,cursor='hand2')
+#多重積分
+mup=StringVar()
+mdown=StringVar()
+mwho=StringVar()
+mul_up_label=Label(cal,text='上限:',bg=ans_color)
+mul_down_label=Label(cal,text='下限:',bg=ans_color)
+mul_who_label=Label(cal,text='對誰積分:',bg=ans_color)
+mul_up_entry=Entry(cal,width=30,textvariable=mup,bg=ans_color)#上限
+mul_down_entry=Entry(cal,width=30,textvariable=mdown,bg=ans_color)#下限
+mul_who_entry=Entry(cal,width=5,textvariable=mwho,bg=ans_color)
+mul_button=Button(cal,text='第%d重積分'%M,command=multiple_ans,bg=green_color,cursor='hand2')
 #=======================================================
 #提示
 prompt=Label(cal,text='提示',font=20,bg=func_color)
@@ -279,8 +384,8 @@ text.place(x=80,y=125)
 答案.place(x=770,y=63)
 #=======================================================
 #返回按鈕
-返回=Button(cal,text='返回(測試)',command=cal_return)
-返回.place(x=500,y=300)
+返回=Button(cal,text='返回',command=cal_return,bg=func_color,cursor='hand2')
+返回.place(x=367,y=126)
 
    
 
