@@ -299,7 +299,7 @@ mixer.music.play(-1)
 #說明
 description_bg='#%02x%02x%02x'%(74,108,109)
 description=Label(cal,justify='left',bg=description_bg)
-description.config(text='✰✰ 你好! ✰✰\n歡迎使用微積分計算機\n\n可以輸入微分、參數式微分、偏微分、\n不定積分、定積分、多重積分來做相對應的計算',font=1,fg='white')
+description.config(text='✰✰ 你好! ✰✰\n歡迎使用微積分計算機\n\n可以使用微分、參數式微分、偏微分、\n不定積分、定積分、多重積分來做相對應的計算',font=1,fg='white')
 #description.after(1000)
 #description.config(text='')
 description.place(x=36,y=510)
