@@ -5,21 +5,41 @@ Created on Sun Dec 20 19:36:31 2020
 @author: admin
 """
 from tkinter import *
+import tkinter as tk
 from PIL import Image,ImageTk
 from sympy import diff,integrate,expand,symbols,latex
 from pygame import mixer
 import matplotlib.pyplot as plt
 x,y,t=symbols("x y t")
 M=1#多重積分記數
+
 #=======================================================
 #按鈕函式
-def calculator():#功能按鈕
-    def_b.place(x=650,y=340)#微分
-    pe_b.place(x=750,y=340)#參數式微分
-    par_b.place(x=850,y=340)#偏微分
-    ind_b.place(x=650,y=380)#不定積分
-    de_b.place(x=750,y=380)#定積分   
-    mul_b.place(x=850,y=380)#多重積分
+set_var=True
+def setting():#字體大小
+    global set_var
+    if set_var==True:
+        set_var=False
+        
+        def_b.place(x=-6500,y=340)
+        pe_b.place(x=-7500,y=340)
+        par_b.place(x=-8500,y=340)
+        ind_b.place(x=-6500,y=380)
+        de_b.place(x=-7500,y=380)   
+        mul_b.place(x=-8500,y=380)
+        cal_font.place(x=620,y=330)
+        b1['text']='計算'
+    else:
+        set_var=True
+        def_b.place(x=650,y=340)
+        pe_b.place(x=750,y=340)
+        par_b.place(x=850,y=340)
+        ind_b.place(x=650,y=380)
+        de_b.place(x=750,y=380)   
+        mul_b.place(x=850,y=380)
+        cal_font.place(x=-6200,y=330)
+        b1['text']='調整字體大小'
+    
 #*******************************************#
 def imp():
     x,y=symbols("x y")
@@ -34,7 +54,7 @@ def imp():
         y=0
         fig=plt.figure()
         plt.plot(x,y)
-        plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=20)  
+        plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=cal_font.get())  
         
         F0.set("Q:%s"%(f0.get().replace("**","^")))
         
@@ -50,7 +70,7 @@ def imp():
         y=0
         fig=plt.figure()
         plt.plot(x,y)
-        plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=20)  
+        plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=cal_font.get())  
         
         F0.set("Q:%s"%(f0.get().replace("**","^")))
         
@@ -94,7 +114,8 @@ def par_ans():
     y=0
     fig=plt.figure()
     plt.plot(x,y)
-    plt.text(-0.005,-0.005,r"$\frac{dy}{dx}=%s$"%b,horizontalalignment='center',fontsize=20)  
+    plt.text(-0.005,-0.005,r"$\frac{dy}{dx}=%s$"%b
+             ,horizontalalignment='center',fontsize=cal_font.get())  
     
     F0.set("Q:%s"%(f0.get().replace("**","^")))
     
@@ -129,7 +150,8 @@ def partial_ans():
     y=0
     fig=plt.figure()
     plt.plot(x,y)
-    plt.text(-0.005,-0.005,r"$\frac{\partial f}{\partial %s}=%s$"%(partial.get(),b),horizontalalignment='center',fontsize=20)  
+    plt.text(-0.005,-0.005,r"$\frac{\partial f}{\partial %s}=%s$"%(partial.get(),b)
+             ,horizontalalignment='center',fontsize=cal_font.get())  
     
     F0.set("Q:%s"%(f0.get().replace("**","^")))
     
@@ -151,7 +173,8 @@ def ind():
     y=0
     fig=plt.figure()
     plt.plot(x,y)
-    plt.text(-0.005,-0.005,r"$\int f(x)dx=%s+C$"%b,horizontalalignment='center',fontsize=20)  
+    plt.text(-0.005,-0.005,r"$\int f(x)dx=%s+C$"%b
+             ,horizontalalignment='center',fontsize=cal_font.get())  
     
     F0.set("Q:%s"%(f0.get().replace("**","^")))
     
@@ -188,7 +211,7 @@ def definite_ans():
     y=0
     fig=plt.figure()
     plt.plot(x,y)
-    plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=20)  
+    plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=cal_font.get())  
     
     F0.set("Q:%s"%(f0.get().replace("**","^")))
     
@@ -231,12 +254,13 @@ def multiple_ans():
     up1=str(mdown.get())
     down1=str(mup.get())    
     X=integrate(f.replace('^','**'),(mwho.get(),up1,down1))
-    b='\int_{%s}^{%s}'%(up1.replace('**','^').replace('*',''),down1.replace('**','^').replace('*',''))+'f(x)='+latex(X)
+    b='\int_{%s}^{%s}'%(up1.replace('**','^').replace('*','')
+                        ,down1.replace('**','^').replace('*',''))+'f(x)='+latex(X)
     x=0
     y=0
     fig=plt.figure()
     plt.plot(x,y)
-    plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=20)  
+    plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=cal_font.get())  
     
     F0.set("Q:%s"%(f0.get().replace("**","^")))
     
@@ -264,6 +288,29 @@ def cal_return():#初始化
 def stop():
     cal.destroy()
     mixer.music.stop()
+    
+bgm_open=True
+def bgm():
+    global bgm_open
+    if bgm_open==True:
+        bgm_open=False
+        music_button.place(x=442,y=7)
+        bgm_choose.place(x=480,y=5)
+        b3['text']='關閉BGM選單'
+    else:
+        bgm_open=True
+        bgm_choose.place(x=-4000,y=5)
+        music_button.place(x=-5800,y=5)
+        b3['text']='BGM'
+        
+def bgmchoose(bgmvar):
+    if bgmvar=='停止播放':
+        mixer.music.stop()
+    else:
+        mixer.init()
+        mixer.music.load('%s.mp3'%bgmvar)
+        mixer.music.play(-1)
+
 #=======================================================
 #視窗
 cal=Tk()
@@ -289,31 +336,32 @@ bg1.pack()
 ans_color='#%02x%02x%02x'%(189,212,169)#綠色深色條紋
 func_color='#%02x%02x%02x'%(219,218,188)#淺咖啡色
 green_color='#%02x%02x%02x'%(199,222,193)#綠色淺色條紋
+sky_color='#%02x%02x%02x'%(118,180,204)#藍色最頂層天空
 #=======================================================
 #bgm
 mixer.init()
-mixer.music.load('BGM.mp3')
+mixer.music.load('預設BGM.mp3')
 mixer.music.play(-1)
 
 #=======================================================
 #說明
 description_bg='#%02x%02x%02x'%(74,108,109)
 description=Label(cal,justify='left',bg=description_bg)
-description.config(text='✰✰ 你好! ✰✰\n歡迎使用微積分計算機\n\n可以使用微分、參數式微分、偏微分、\n不定積分、定積分、多重積分來做相對應的計算',font=1,fg='white')
+description.config(text='✰✰ 你好! ✰✰\n歡迎使用微積分計算機\n\n可以輸入微分、參數式微分、偏微分、\n不定積分、定積分、多重積分來做相對應的計算',font=1,fg='white')
 #description.after(1000)
 #description.config(text='')
 description.place(x=36,y=510)
-#top=Toplevel(cal)
+
 
 #=======================================================
 #按鈕
-b1=Button(cal,text='計算',command=calculator,height=2,width=23,font=1,cursor='hand2')
+b1=Button(cal,text='調整字體大小',command=setting,height=2,width=23,font=1,cursor='hand2')
 b1.place(x=570,y=510)
 
-b2=Button(cal,text='提示',command=cal.destroy,height=2,width=23,font=1,cursor='heart')
+b2=Button(cal,text='提示',command=stop,height=2,width=23,font=1,cursor='heart')
 b2.place(x=810,y=510)
 
-b3=Button(cal,text='設定',command=cal.destroy,height=2,width=23,font=1,cursor='hand2')#改音樂,字體大小
+b3=Button(cal,text='BGM',command=bgm,height=2,width=23,font=1,cursor='hand2')
 b3.place(x=570,y=575)
 
 b4=Button(cal,text='逃跑(廢物)',command=stop,height=2,width=23,font=1,cursor='hand2')
@@ -326,6 +374,13 @@ pe_b=Button(cal,text="參數式微分",command=parametric_equations,bg=func_colo
 de_b=Button(cal,text="定積分",command=definite,bg=func_color,width=8,cursor='hand2')
 par_b=Button(cal,text="偏微分",command=partial,bg=func_color,width=8,cursor='hand2')
 mul_b=Button(cal,text="多重積分",command=multiple,bg=func_color,width=8,cursor='hand2')
+
+def_b.place(x=650,y=340)#微分
+pe_b.place(x=750,y=340)#參數式微分
+par_b.place(x=850,y=340)#偏微分
+ind_b.place(x=650,y=380)#不定積分
+de_b.place(x=750,y=380)#定積分   
+mul_b.place(x=850,y=380)#多重積分
 #=======================================================
 #輸入函數
 f0=StringVar()
@@ -386,8 +441,29 @@ text.place(x=80,y=125)
 #返回按鈕
 返回=Button(cal,text='返回',command=cal_return,bg=func_color,cursor='hand2')
 返回.place(x=367,y=126)
+#=======================================================
+#字體大小
+cal_font=Scale(cal,label='調整字體大小',from_=10,to=30,orient=HORIZONTAL
+               ,length=350,tickinterval=1,bg=func_color)
+cal_font.set(20)
 
-   
+#=======================================================
+#提示
+
+#=======================================================
+#bgm選單
+music_var=StringVar()
+musictuple=('停止播放','明日方舟戰鬥音樂','環太平洋','代表死亡的音樂','大悲咒'
+            ,'黑人抬棺','JOJO','Nyan cat','抖音仔最愛，八神搖','海綿寶寶1'
+            ,'海綿寶寶2','海綿寶寶3','海綿寶寶4','海綿寶寶5','烏龍派出所'
+            ,'貓咪大戰爭1','貓咪大戰爭2','貓咪大戰爭3','海賊王1','海賊王2'
+            ,'海賊王3','火影忍者','恐怖之森背景音樂','鬼滅之刃','寶可夢劍盾戰鬥戰鬥音樂'
+            ,'預設BGM')
+bgm_choose=OptionMenu(cal,music_var,*musictuple)
+music_var.set('預設BGM')
+
+music_button=Button(cal,text='確認',command=lambda:bgmchoose('%s'%music_var.get()),cursor='hand2')
+
 
 
 
