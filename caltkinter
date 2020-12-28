@@ -44,19 +44,14 @@ def setting():#字體大小
 def imp():
     x,y=symbols("x y")
     f=str(f0.get())
-    X=diff(f.replace('^','**'),x)
-    X=expand(X)
-    Y=diff(f.replace('^','**'),y)
-    Y=expand(Y)
-    if Y == 0:
-        b=latex(X)
+    if f=='exp(2*x)':
         x=0
         y=0
         fig=plt.figure()
         plt.plot(x,y)
-        plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=cal_font.get())  
-        
-        F0.set("Q:%s"%(f0.get().replace("**","^")))
+        plt.text(-0.005,-0.005,r"$e^{2x}+e^{2x}$",horizontalalignment='center',fontsize=20)  
+        plt.text(-0.005,-0.02,"幹你娘!",horizontalalignment='center',fontsize=12,fontproperties='SimSun')
+        F0.set("恭喜發現彩蛋!")
         
         fig.savefig('ans.png')       
         aimg=Image.open("ans.png")
@@ -65,21 +60,42 @@ def imp():
         ans.place(x=635,y=90)
         func_entry.delete(0,END)
     else:
-        b=latex(-X/Y)
-        x=0
-        y=0
-        fig=plt.figure()
-        plt.plot(x,y)
-        plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=cal_font.get())  
-        
-        F0.set("Q:%s"%(f0.get().replace("**","^")))
-        
-        fig.savefig('ans.png')        
-        aimg=Image.open("ans.png")
-        ANS=ImageTk.PhotoImage(aimg)
-        ans=Label(cal,height=150,width=310,image=ANS)
-        ans.place(x=635,y=90)
-        func_entry.delete(0,END)
+        X=diff(f.replace('^','**'),x)
+        X=expand(X)
+        Y=diff(f.replace('^','**'),y)
+        Y=expand(Y)
+        if Y == 0:
+            b=latex(X)
+            x=0
+            y=0
+            fig=plt.figure()
+            plt.plot(x,y)
+            plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=cal_font.get())  
+            
+            F0.set("Q:%s"%(f0.get().replace("**","^")))
+            
+            fig.savefig('ans.png')       
+            aimg=Image.open("ans.png")
+            ANS=ImageTk.PhotoImage(aimg)
+            ans=Label(cal,height=150,width=310,image=ANS)
+            ans.place(x=635,y=90)
+            func_entry.delete(0,END)
+        else:
+            b=latex(-X/Y)
+            x=0
+            y=0
+            fig=plt.figure()
+            plt.plot(x,y)
+            plt.text(-0.005,-0.005,r"$%s$"%b,horizontalalignment='center',fontsize=cal_font.get())  
+            
+            F0.set("Q:%s"%(f0.get().replace("**","^")))
+            
+            fig.savefig('ans.png')        
+            aimg=Image.open("ans.png")
+            ANS=ImageTk.PhotoImage(aimg)
+            ans=Label(cal,height=150,width=310,image=ANS)
+            ans.place(x=635,y=90)
+            func_entry.delete(0,END)
 #++++++++++++++++++++++++++++++++++  參數      
 def parametric_equations():#顯示元件
     del_definite()
