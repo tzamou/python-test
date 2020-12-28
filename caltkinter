@@ -317,7 +317,7 @@ def bgm():
         bgm_open=True
         bgm_choose.place(x=-4000,y=5)
         music_button.place(x=-5800,y=5)
-        b3['text']='BGM'
+        b3['text']='選擇BGM'
         
 def bgmchoose(bgmvar):
     if bgmvar=='停止播放':
@@ -362,11 +362,11 @@ mixer.music.play(-1)
 #=======================================================
 #說明
 description_bg='#%02x%02x%02x'%(74,108,109)
-description=Label(cal,justify='left',bg=description_bg)
-description.config(text='✰✰ 你好! ✰✰\n歡迎使用微積分計算機\n\n可以輸入微分、參數式微分、偏微分、\n不定積分、定積分、多重積分來做相對應的計算',font=1,fg='white')
+description=Label(cal,justify='center',bg=description_bg
+                  ,text='✰✰ 你好! ✰✰\n歡迎使用微積分計算機',font="標楷體 20 bold",fg='white')
 #description.after(1000)
 #description.config(text='')
-description.place(x=36,y=510)
+description.place(x=120,y=530)
 
 
 #=======================================================
@@ -377,7 +377,7 @@ b1.place(x=570,y=510)
 b2=Button(cal,text='提示',command=stop,height=2,width=23,font=1,cursor='heart')
 b2.place(x=810,y=510)
 
-b3=Button(cal,text='BGM',command=bgm,height=2,width=23,font=1,cursor='hand2')
+b3=Button(cal,text='選擇BGM',command=bgm,height=2,width=23,font=1,cursor='hand2')
 b3.place(x=570,y=575)
 
 b4=Button(cal,text='逃跑(廢物)',command=stop,height=2,width=23,font=1,cursor='hand2')
@@ -466,7 +466,7 @@ musictuple=('停止播放','明日方舟戰鬥音樂','環太平洋','代表死�
             ,'黑人抬棺','JOJO','Nyan cat','抖音仔最愛，八神搖','海綿寶寶1'
             ,'海綿寶寶2','海綿寶寶3','海綿寶寶4','海綿寶寶5','烏龍派出所'
             ,'貓咪大戰爭1','貓咪大戰爭2','貓咪大戰爭3','海賊王1','海賊王2'
-            ,'海賊王3','火影忍者','恐怖之森背景音樂','鬼滅之刃','寶可夢劍盾戰鬥戰鬥音樂'
+            ,'海賊王3','火影忍者','恐怖之森背景音樂','鬼滅之刃','寶可夢劍盾戰鬥音樂'
             ,'預設BGM')
 bgm_choose=OptionMenu(cal,music_var,*musictuple)
 music_var.set('預設BGM')
@@ -475,6 +475,7 @@ music_button=Button(cal,text='確認',command=lambda:bgmchoose('%s'%music_var.ge
 
 #=======================================================
 #提示
+
 
 
 
