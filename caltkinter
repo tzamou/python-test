@@ -422,10 +422,6 @@ mul_up_entry=Entry(cal,width=30,textvariable=mup,bg=ans_color)#上限
 mul_down_entry=Entry(cal,width=30,textvariable=mdown,bg=ans_color)#下限
 mul_who_entry=Entry(cal,width=5,textvariable=mwho,bg=ans_color)
 mul_button=Button(cal,text='第%d重積分'%M,command=multiple_ans,bg=green_color,cursor='hand2')
-#=======================================================
-#提示
-prompt=Label(cal,text='提示',font=20,bg=func_color)
-#prompt.place(x=780,y=325)
 
 #=======================================================
 #紀錄
@@ -435,21 +431,18 @@ text.place(x=80,y=125)
 
 #=======================================================
 #答案
-答案=Label(cal,bitmap='warning',compound='right',text='ANS ',font=25,bg=ans_color,fg='blue')
-答案.place(x=770,y=63)
+your_ans=Label(cal,bitmap='warning',compound='right',text='ANS ',font=25,bg=ans_color,fg='blue')
+your_ans.place(x=770,y=63)
 #=======================================================
 #返回按鈕
-返回=Button(cal,text='返回',command=cal_return,bg=func_color,cursor='hand2')
-返回.place(x=367,y=126)
+cal_return=Button(cal,text='返回',command=cal_return,bg=func_color,cursor='hand2')
+cal_return.place(x=367,y=126)
 #=======================================================
 #字體大小
 cal_font=Scale(cal,label='調整字體大小',from_=10,to=30,orient=HORIZONTAL
-               ,length=350,tickinterval=1,bg=func_color)
+               ,length=350,tickinterval=1,bg=func_color,cursor='cross')
+
 cal_font.set(20)
-
-#=======================================================
-#提示
-
 #=======================================================
 #bgm選單
 music_var=StringVar()
@@ -464,7 +457,8 @@ music_var.set('預設BGM')
 
 music_button=Button(cal,text='確認',command=lambda:bgmchoose('%s'%music_var.get()),cursor='hand2')
 
-
+#=======================================================
+#提示
 
 
 
