@@ -28,16 +28,19 @@ def setting():#字體大小
         ind_b.place(x=-6500,y=380)
         de_b.place(x=-7500,y=380)   
         mul_b.place(x=-8500,y=380)
+        sub_b.place(x=-6350,y=395)
         cal_font.place(x=620,y=330)
+        
         b1['text']='計算'
     else:
         set_var=True
-        def_b.place(x=650,y=340)
-        pe_b.place(x=750,y=340)
-        par_b.place(x=850,y=340)
-        ind_b.place(x=650,y=380)
-        de_b.place(x=750,y=380)   
-        mul_b.place(x=850,y=380)
+        def_b.place(x=650,y=330)
+        pe_b.place(x=750,y=330)
+        par_b.place(x=850,y=330)
+        ind_b.place(x=650,y=370)
+        de_b.place(x=750,y=370)   
+        mul_b.place(x=850,y=370)
+        sub_b.place(x=635,y=395)
         cal_font.place(x=-6200,y=330)
         b1['text']='調整字體大小'
     
@@ -102,6 +105,7 @@ def parametric_equations():#顯示元件
     del_definite()
     del_partial()
     del_multiple()
+    del_sub()
     text.place(x=-800,y=125)
     func_label.place(x=-760,y=82)
     func_entry.place(x=-800,y=105)
@@ -112,11 +116,11 @@ def parametric_equations():#顯示元件
     par_button.place(x=108,y=128)
 def del_par():
     par_x.place(x=-760,y=82)
-    par_y.place(x=-760,y=82)
-    text.place(x=80,y=125)
+    par_y.place(x=-760,y=82)    
     parx_label.place(x=-760,y=82)
     pary_label.place(x=-760,y=82)
     par_button.place(x=-1080,y=128)
+    text.place(x=80,y=125)
     func_label.place(x=76,y=82)
     func_entry.place(x=80,y=105)
 def par_ans():
@@ -148,6 +152,7 @@ def partial():#顯示元件
     del_par()
     del_definite()
     del_multiple()
+    del_sub()
     clear_button.place(x=200,y=78)
     partial_label.place(x=285,y=80)
     partial_entry.place(x=390,y=82)
@@ -201,11 +206,59 @@ def ind():
     ans=Label(cal,height=150,width=310,image=ANS)
     ans.place(x=635,y=90)
     func_entry.delete(0,END)
+#++++++++++++++++++++++++++++++++++代換
+def substitution():
+    del_par()
+    del_partial()
+    del_multiple()
+    text.place(x=-800,y=125)
+    func_label.place(x=-760,y=82)
+    func_entry.place(x=-800,y=105)
+    sub_u_label.place(x=76,y=79)
+    u_to_x_label.place(x=74,y=102)
+    sub_u.place(x=108,y=82)
+    u_to_x.place(x=108,y=105)
+    sub_button.place(x=108,y=128)
+    
+def del_sub():
+    sub_u_label.place(x=-760,y=79)
+    u_to_x_label.place(x=-740,y=102)
+    sub_u.place(x=-1080,y=82)
+    u_to_x.place(x=-1080,y=105)
+    sub_button.place(x=-1080,y=128)
+    text.place(x=80,y=125)
+    func_label.place(x=76,y=82)
+    func_entry.place(x=80,y=105)
+
+def sub_ans():
+    u,x,y=symbols("u x y")
+    f=str(u0.get())
+    X=integrate(f.replace('^','**'),u)
+    X1=X.subs(u,ux.get())
+    b=latex(X1)
+    x=0
+    y=0
+    fig=plt.figure()
+    plt.plot(x,y)
+    plt.text(-0.005,-0.005,r"$\int f(x)dx=%s+C$"%b
+             ,horizontalalignment='center',fontsize=cal_font.get())  
+    
+    F0.set("Q:%s"%(f0.get().replace("**","^")))
+    
+    fig.savefig('ans.png')       
+    aimg=Image.open("ans.png")
+    ANS=ImageTk.PhotoImage(aimg)
+    ans=Label(cal,height=150,width=310,image=ANS)
+    ans.place(x=635,y=90)
+    sub_u.delete(0,END)
+    u_to_x.delete(0,END)
+
 #++++++++++++++++++++++++++++++++++    定積分    
 def definite():#顯示元件
     del_par()
     del_partial()
     del_multiple()
+    del_sub()
     up_label.place(x=48,y=188)
     up_entry.place(x=80,y=190)
     down_label.place(x=48,y=208)
@@ -246,6 +299,7 @@ def multiple():#顯示元件
     del_definite()
     del_par()
     del_partial()
+    del_sub()
     mul_up_label.place(x=48,y=188)
     mul_down_label.place(x=48,y=208)
     mul_who_label.place(x=48,y=228)
@@ -299,6 +353,7 @@ def cal_return():#初始化
     del_par()
     del_partial()
     del_multiple()
+    del_sub()
     func_label.place(x=76,y=82)
     func_entry.place(x=80,y=105)
     text.place(x=80,y=125)
@@ -338,7 +393,9 @@ def bgmchoose(bgmvar):
 #=======================================================
 #提示
 prompt_color='#%02x%02x%02x'%(212,176,123)
+prompt_color2='#%02x%02x%02x'%(219,213,168)
 def prompt():
+    pro_text=StringVar()
     cal_prompt=Toplevel(cal)
     cal_prompt.title('提示')
     cal_prompt.iconbitmap('prompt.ico')
@@ -352,6 +409,13 @@ def prompt():
     prompt_stop_btn=Button(cal_prompt,text="關閉",font=5,command=cal_prompt.destroy
                            ,width=12,height=5)
     prompt_stop_btn.place(x=22,y=290)
+    
+    prompt_text=Label(cal_prompt,height=31,width=52,bg=prompt_color2
+                      ,textvariable=pro_text,anchor='nw',font="標楷體 12 bold")
+    prompt_text.place(x=450,y=70)
+    pro_text.set('1.')
+    
+    
 #=======================================================
 #視窗
 cal=Tk()
@@ -417,13 +481,15 @@ pe_b=Button(cal,text="參數式微分",command=parametric_equations,bg=func_colo
 de_b=Button(cal,text="定積分",command=definite,bg=func_color,width=8,cursor='hand2')
 par_b=Button(cal,text="偏微分",command=partial,bg=func_color,width=8,cursor='hand2')
 mul_b=Button(cal,text="多重積分",command=multiple,bg=func_color,width=8,cursor='hand2')
+sub_b=Button(cal,text="不定積分代換法",command=substitution,bg=func_color,width=12,cursor='hand2')
 
-def_b.place(x=650,y=340)#微分
-pe_b.place(x=750,y=340)#參數式微分
-par_b.place(x=850,y=340)#偏微分
-ind_b.place(x=650,y=380)#不定積分
-de_b.place(x=750,y=380)#定積分   
-mul_b.place(x=850,y=380)#多重積分
+def_b.place(x=650,y=330)#微分
+pe_b.place(x=750,y=330)#參數式微分
+par_b.place(x=850,y=330)#偏微分
+ind_b.place(x=650,y=370)#不定積分
+de_b.place(x=750,y=370)#定積分   
+mul_b.place(x=850,y=370)#多重積分
+sub_b.place(x=635,y=395)#代換法
 #=======================================================
 #輸入函數
 f0=StringVar()
@@ -465,7 +531,14 @@ mul_up_entry=Entry(cal,width=30,textvariable=mup,bg=ans_color)#上限
 mul_down_entry=Entry(cal,width=30,textvariable=mdown,bg=ans_color)#下限
 mul_who_entry=Entry(cal,width=5,textvariable=mwho,bg=ans_color)
 mul_button=Button(cal,text='第%d重積分'%M,command=multiple_ans,bg=green_color,cursor='hand2')
-
+#代換法
+u0=StringVar()
+ux=StringVar()
+sub_u=Entry(cal,width=30,textvariable=u0,bg=func_color)
+u_to_x=Entry(cal,width=30,textvariable=ux,bg=func_color)
+sub_u_label=Label(cal,text='f(u)=',bg=func_color)
+u_to_x_label=Label(cal,text='u(x)=',bg=func_color)
+sub_button=Button(cal,text='計算',command=sub_ans,bg=func_color,cursor='hand2')
 #=======================================================
 #紀錄
 F0=StringVar()
