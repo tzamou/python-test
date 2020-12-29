@@ -5,6 +5,7 @@ Created on Sun Dec 20 19:36:31 2020
 @author: admin
 """
 from tkinter import *
+from tkinter import messagebox
 import tkinter as tk
 from PIL import Image,ImageTk
 from sympy import diff,integrate,expand,symbols,latex
@@ -302,8 +303,15 @@ def cal_return():#初始化
     func_entry.place(x=80,y=105)
     text.place(x=80,y=125)
 def stop():
-    cal.destroy()
-    mixer.music.stop()
+    mixer.init()
+    mixer.music.load('SBclose.mp3')
+    mixer.music.play(-1)
+    music_var.set('海綿寶寶片尾曲(彩蛋)')
+    stopchoose=messagebox.askquestion("離開?","你確定要關閉嗎?")
+    if stopchoose=='yes':
+        cal.destroy()
+        mixer.music.stop()
+    
     
 bgm_open=True
 def bgm():
@@ -328,10 +336,28 @@ def bgmchoose(bgmvar):
         mixer.music.play(-1)
 
 #=======================================================
+#提示
+prompt_color='#%02x%02x%02x'%(212,176,123)
+def prompt():
+    cal_prompt=Toplevel(cal)
+    cal_prompt.title('提示')
+    cal_prompt.iconbitmap('prompt.ico')
+    cal_prompt.resizable(width=False,height=False)
+    
+    bg2=Label(cal_prompt,image=promptbg)
+    bg2.pack()
+    prompt_title=Label(cal_prompt,text="提  示",font="標楷體 30 bold",bg=prompt_color)
+    prompt_title.place(x=180,y=43)
+    
+    prompt_stop_btn=Button(cal_prompt,text="關閉",font=5,command=cal_prompt.destroy
+                           ,width=12,height=5)
+    prompt_stop_btn.place(x=22,y=290)
+#=======================================================
 #視窗
 cal=Tk()
 cal.iconbitmap("cal.ico")
 cal.title("微積分計算機")
+cal.resizable(width=False,height=False)
 #=======================================================
 #視窗置中上
 sw=cal.winfo_screenwidth()
@@ -374,14 +400,15 @@ description.place(x=120,y=530)
 b1=Button(cal,text='調整字體大小',command=setting,height=2,width=23,font=1,cursor='hand2')
 b1.place(x=570,y=510)
 
-b2=Button(cal,text='提示',command=stop,height=2,width=23,font=1,cursor='heart')
+b2=Button(cal,text='提示',command=prompt,height=2,width=23,font=1,cursor='heart')
 b2.place(x=810,y=510)
 
 b3=Button(cal,text='選擇BGM',command=bgm,height=2,width=23,font=1,cursor='hand2')
 b3.place(x=570,y=575)
 
 b4=Button(cal,text='逃跑(廢物)',command=stop,height=2,width=23,font=1,cursor='hand2')
-b4.place(x=810,y=575)
+b4.place(x=810,y=575)        
+
 '''----------------------------------------------------'''
 
 def_b=Button(cal,text="微分",command=imp,bg=func_color,width=8,cursor='hand2')
@@ -474,14 +501,12 @@ music_var.set('預設BGM')
 music_button=Button(cal,text='確認',command=lambda:bgmchoose('%s'%music_var.get()),cursor='hand2')
 
 #=======================================================
-#提示
+#提示的背景&標籤元件三小的
+img1=Image.open("promptbg.png")
+promptbg=ImageTk.PhotoImage(img1)
 
 
-
-
-
-
-
+ 
 
 
 
