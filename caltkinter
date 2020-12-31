@@ -44,7 +44,8 @@ def setting():#字體大小
         cal_font.place(x=-6200,y=330)
         b1['text']='調整字體大小'
     
-#*******************************************#
+#*******************************************
+#計算
 def imp():
     x,y=symbols("x y")
     f=str(f0.get())
@@ -100,7 +101,7 @@ def imp():
             ans=Label(cal,height=150,width=310,image=ANS)
             ans.place(x=635,y=90)
             func_entry.delete(0,END)
-#++++++++++++++++++++++++++++++++++  參數      
+#++++++++++++++++++++++++++++++++++參數式微分     
 def parametric_equations():#顯示元件
     del_definite()
     del_partial()
@@ -147,7 +148,7 @@ def par_ans():
     ans.place(x=635,y=90)
     par_x.delete(0,END)
     par_y.delete(0,END)
-#++++++++++++++++++++++++++++++++++   偏微分
+#++++++++++++++++++++++++++++++++++偏微分
 def partial():#顯示元件
     del_par()
     del_definite()
@@ -185,7 +186,7 @@ def partial_ans():
     partial_entry.delete(0,END)
 def partial_clear():
     func_entry.delete(0,END)
-#++++++++++++++++++++++++++++++++++     不定
+#++++++++++++++++++++++++++++++++++不定積分
 def ind():
     x,y=symbols("x y")
     f=str(f0.get())
@@ -206,8 +207,8 @@ def ind():
     ans=Label(cal,height=150,width=310,image=ANS)
     ans.place(x=635,y=90)
     func_entry.delete(0,END)
-#++++++++++++++++++++++++++++++++++代換
-def substitution():
+#++++++++++++++++++++++++++++++++++代換法
+def substitution():#顯示元件
     del_par()
     del_partial()
     del_multiple()
@@ -253,7 +254,7 @@ def sub_ans():
     sub_u.delete(0,END)
     u_to_x.delete(0,END)
 
-#++++++++++++++++++++++++++++++++++    定積分    
+#++++++++++++++++++++++++++++++++++定積分    
 def definite():#顯示元件
     del_par()
     del_partial()
@@ -293,7 +294,7 @@ def definite_ans():
     func_entry.delete(0,END)
     up_entry.delete(0,END) 
     down_entry.delete(0,END) 
-#++++++++++++++++++++++++++++++++++多重
+#++++++++++++++++++++++++++++++++++多重積分
 
 def multiple():#顯示元件
     del_definite()
@@ -357,11 +358,13 @@ def cal_return():#初始化
     func_label.place(x=76,y=82)
     func_entry.place(x=80,y=105)
     text.place(x=80,y=125)
-def stop():
+    
+def stop():#關閉視窗
     mixer.init()
     mixer.music.load('SBclose.mp3')
     mixer.music.play(-1)
     music_var.set('海綿寶寶片尾曲(彩蛋)')
+    #對話方塊
     stopchoose=messagebox.askquestion("離開?","你確定要關閉嗎?")
     if stopchoose=='yes':
         cal.destroy()
@@ -391,7 +394,7 @@ def bgmchoose(bgmvar):
         mixer.music.play(-1)
 
 #=======================================================
-#提示
+#提示視窗
 prompt_color='#%02x%02x%02x'%(212,176,123)
 prompt_color2='#%02x%02x%02x'%(219,213,168)
 def prompt():
@@ -580,6 +583,7 @@ promptbg=ImageTk.PhotoImage(img1)
 
 
  
+
 
 
 
