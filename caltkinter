@@ -416,7 +416,7 @@ def prompt():
     prompt_text=Label(cal_prompt,height=31,width=52,bg=prompt_color2
                       ,textvariable=pro_text,anchor='nw',font="標楷體 12 bold")
     prompt_text.place(x=450,y=70)
-    pro_text.set('1.')
+    pro_text.set('1.三角函數用sin(x),cos(x),tan(x),cot(x),sec(x),csc(x),x表示函數\n2.反三角函數用asin(x),acos(x),atan(x),acot(x),asec(x),acsc(x),x表示函數\n3.指數函數用exp(x)來表示e的x次方,對數函數用log(x)來表示\n')
     
     
 #=======================================================
